@@ -1,0 +1,1 @@
+import React from'react';import styles from'./Title.module.css';interface TitleProps{children:React.ReactNode;order?:1|2|3|4|5|6;className?:string}export function Title({children,order=2,className=''}:TitleProps){const Tag=`h${order}`as keyof JSX.IntrinsicElements;return <Tag className={`${styles.t} ${styles[`h${order}`]} ${className}`}>{children}</Tag>}

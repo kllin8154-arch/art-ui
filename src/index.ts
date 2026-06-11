@@ -389,6 +389,27 @@ export { Center } from './components/Center/Center';
 // ─── Paper ───
 export { Paper } from './components/Paper/Paper';
 
+// ─── Text ───
+export { Text } from './components/Text/Text';
+
+// ─── Title ───
+export { Title } from './components/Title/Title';
+
+// ─── Image ───
+export { Image } from './components/Image/Image';
+
+// ─── Overlay ───
+export { Overlay } from './components/Overlay/Overlay';
+
+// ─── Affix ───
+export { Affix } from './components/Affix/Affix';
+
+// ─── Blockquote ───
+export { Blockquote } from './components/Blockquote/Blockquote';
+
+// ─── List ───
+export { List } from './components/List/List';
+
 // ─── Hooks ───
 export { useMediaQuery, useBreakpoint } from './hooks/useMediaQuery';
 export { useScrollPosition, useParallax, useInView } from './hooks/useScrollPosition';
