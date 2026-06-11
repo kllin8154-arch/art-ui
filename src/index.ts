@@ -431,6 +431,27 @@ export { FileInput } from './components/FileInput/FileInput';
 // ─── InputGroup ───
 export { InputGroup } from './components/InputGroup/InputGroup';
 
+// ─── Tree ───
+export { Tree } from './components/Tree/Tree';
+
+// ─── Upload ───
+export { Upload } from './components/Upload/Upload';
+
+// ─── Cascader ───
+export { Cascader } from './components/Cascader/Cascader';
+
+// ─── AutoComplete ───
+export { AutoComplete } from './components/AutoComplete/AutoComplete';
+
+// ─── Transfer ───
+export { Transfer } from './components/Transfer/Transfer';
+
+// ─── VirtualList ───
+export { VirtualList } from './components/VirtualList/VirtualList';
+
+// ─── Portal ───
+export { Portal } from './components/Portal/Portal';
+
 // ─── Hooks ───
 export { useMediaQuery, useBreakpoint } from './hooks/useMediaQuery';
 export { useScrollPosition, useParallax, useInView } from './hooks/useScrollPosition';

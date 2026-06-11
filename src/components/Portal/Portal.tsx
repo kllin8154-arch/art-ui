@@ -1,0 +1,1 @@
+import React from'react';import{createPortal}from'react-dom';interface PortalProps{children:React.ReactNode;target?:HTMLElement|string}export function Portal({children,target}:PortalProps){const el=typeof target==='string'?document.querySelector(target)as HTMLElement:target||document.body;if(!el)return null;return createPortal(children,el)}
