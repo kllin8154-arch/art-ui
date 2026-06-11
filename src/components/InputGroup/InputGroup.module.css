@@ -1,0 +1,1 @@
+.g{display:flex;align-items:stretch}.g>*{border-radius:0;margin-left:-1px}.g>*:first-child{border-radius:var(--art-radius-md) 0 0 var(--art-radius-md);margin-left:0}.g>*:last-child{border-radius:0 var(--art-radius-md) var(--art-radius-md) 0}.g>*:focus{z-index:1}

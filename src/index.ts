@@ -410,6 +410,27 @@ export { Blockquote } from './components/Blockquote/Blockquote';
 // ─── List ───
 export { List } from './components/List/List';
 
+// ─── Spoiler ───
+export { Spoiler } from './components/Spoiler/Spoiler';
+
+// ─── Highlight ───
+export { Highlight } from './components/Highlight/Highlight';
+
+// ─── Indicator ───
+export { Indicator } from './components/Indicator/Indicator';
+
+// ─── ColorSwatch ───
+export { ColorSwatch } from './components/ColorSwatch/ColorSwatch';
+
+// ─── FocusTrap ───
+export { FocusTrap } from './components/FocusTrap/FocusTrap';
+
+// ─── FileInput ───
+export { FileInput } from './components/FileInput/FileInput';
+
+// ─── InputGroup ───
+export { InputGroup } from './components/InputGroup/InputGroup';
+
 // ─── Hooks ───
 export { useMediaQuery, useBreakpoint } from './hooks/useMediaQuery';
 export { useScrollPosition, useParallax, useInView } from './hooks/useScrollPosition';

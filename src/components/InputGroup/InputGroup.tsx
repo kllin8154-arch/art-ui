@@ -1,0 +1,1 @@
+import React from'react';import styles from'./InputGroup.module.css';interface InputGroupProps{children:React.ReactNode;gap?:number;className?:string}export function InputGroup({children,gap=0,className=''}:InputGroupProps){return <div className={`${styles.g} ${className}`} style={{gap:gap?`${gap}px`:undefined}}>{children}</div>}
