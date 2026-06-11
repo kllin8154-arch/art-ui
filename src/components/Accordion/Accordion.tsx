@@ -1,23 +1,49 @@
-import React,{useState}from'react';import styles from'./Accordion.module.css';
+import React, { useState, useCallback } from 'react';
+import styles from './Accordion.module.css';
 
-interface AccordionItem{title:string;content:React.ReactNode}
-interface AccordionProps{items:AccordionItem[];allowMultiple?:boolean;className?:string}
+export interface AccordionItem {
+  id: string;
+  title: React.ReactNode;
+  content: React.ReactNode;
+  disabled?: boolean;
+}
 
-export function Accordion({items,allowMultiple,className=''}:AccordionProps){
-  const[openSet,setOpenSet]=useState<Set<number>>(new Set());
-  const toggle=(i:number)=>{const next=new Set(allowMultiple?openSet:[]);if(next.has(i))next.delete(i);else next.add(i);setOpenSet(next)};
-  return(
-    <div className={className}>
-      {items.map((item,i)=>(
-        <div key={i} className={`${styles.item} ${openSet.has(i)?styles.open:''}`}>
-          <button className={styles.trigger} onClick={()=>toggle(i)}>
-            <span>{item.title}</span><span className={styles.icon}>+</span>
-          </button>
-          <div className={`${styles.content} ${openSet.has(i)?styles.openContent:''}`}>
-            <div className={styles.inner}>{item.content}</div>
+export interface AccordionProps {
+  items: AccordionItem[];
+  defaultExpanded?: string[];
+  allowMultiple?: boolean;
+  className?: string;
+}
+
+export function Accordion({ items, defaultExpanded = [], allowMultiple = false, className = '' }: AccordionProps) {
+  const [expanded, setExpanded] = useState<Set<string>>(new Set(defaultExpanded));
+  const toggle = useCallback((id: string) => {
+    setExpanded(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) { next.delete(id); }
+      else { if (!allowMultiple) next.clear(); next.add(id); }
+      return next;
+    });
+  }, [allowMultiple]);
+
+  return (
+    <div className={`${styles.accordion} ${className}`}>
+      {items.map(item => {
+        const isOpen = expanded.has(item.id);
+        return (
+          <div key={item.id} className={`${styles.item} ${isOpen ? styles.open : ''} ${item.disabled ? styles.disabled : ''}`}>
+            <button className={styles.trigger} onClick={() => !item.disabled && toggle(item.id)} aria-expanded={isOpen} disabled={item.disabled} type="button">
+              <span className={styles.title}>{item.title}</span>
+              <svg className={`${styles.icon} ${isOpen ? styles.iconOpen : ''}`} width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M4 6l4 4 4-4" />
+              </svg>
+            </button>
+            <div className={`${styles.panel} ${isOpen ? styles.panelOpen : ''}`}>
+              <div className={styles.content}>{item.content}</div>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

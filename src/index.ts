@@ -326,6 +326,30 @@ export { Onboarding } from './components/Onboarding/Onboarding';
 // ─── SocialLogin ───
 export { SocialLogin } from './components/SocialLogin/SocialLogin';
 
+// ─── Accordion ───
+export { Accordion } from './components/Accordion/Accordion';
+
+// ─── Slider ───
+export { Slider } from './components/Slider/Slider';
+
+// ─── Alert ───
+export { Alert } from './components/Alert/Alert';
+
+// ─── ScrollArea ───
+export { ScrollArea } from './components/ScrollArea/ScrollArea';
+
+// ─── Collapse ───
+export { Collapse } from './components/Collapse/Collapse';
+
+// ─── HoverCard ───
+export { HoverCard } from './components/HoverCard/HoverCard';
+
+// ─── Anchor ───
+export { Anchor } from './components/Anchor/Anchor';
+
+// ─── Container ───
+export { Container } from './components/Container/Container';
+
 // ─── Hooks ───
 export { useMediaQuery, useBreakpoint } from './hooks/useMediaQuery';
 export { useScrollPosition, useParallax, useInView } from './hooks/useScrollPosition';
