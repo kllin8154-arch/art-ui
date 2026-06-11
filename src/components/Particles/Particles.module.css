@@ -1,0 +1,1 @@
+.wrap{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}.particle{position:absolute;border-radius:50%;opacity:.6;animation:float linear infinite}@keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.6}90%{opacity:.4}100%{transform:translateY(-10vh) scale(1);opacity:0}}

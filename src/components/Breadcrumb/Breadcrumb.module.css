@@ -1,0 +1,5 @@
+.crumb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.85rem}
+.link{color:var(--art-color-text-muted);transition:color .3s}
+.link:hover{color:var(--art-color-accent)}
+.current{color:var(--art-color-text);font-weight:500}
+.sep{color:var(--art-color-border);user-select:none}

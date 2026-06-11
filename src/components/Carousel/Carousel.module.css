@@ -1,0 +1,147 @@
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--art-radius-lg);
+  background: var(--art-color-bg-secondary);
+}
+
+/* ─── 轨道 ─── */
+.track {
+  display: flex;
+  transition: transform var(--art-transition-slow);
+  will-change: transform;
+}
+
+.fade .track {
+  display: block;
+  position: relative;
+}
+
+/* ─── 单张幻灯片 ─── */
+.slide {
+  flex: 0 0 100%;
+  position: relative;
+}
+
+.fade .slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--art-transition-slow);
+}
+
+.fade .slideActive {
+  position: relative;
+  opacity: 1;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── 标题叠加层 ─── */
+.caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--art-spacing-3xl) var(--art-spacing-xl) var(--art-spacing-xl);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  color: #fff;
+}
+
+.captionTitle {
+  font-family: var(--art-font-display);
+  font-size: var(--art-font-size-xl);
+  font-weight: var(--art-font-weight-bold);
+  margin-bottom: var(--art-spacing-xs);
+}
+
+.captionText {
+  font-size: var(--art-font-size-sm);
+  opacity: 0.8;
+}
+
+/* ─── 导航箭头 ─── */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: all var(--art-transition);
+  opacity: 0;
+}
+
+.carousel:hover .arrow {
+  opacity: 1;
+}
+
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.arrowPrev { left: var(--art-spacing-md); }
+.arrowNext { right: var(--art-spacing-md); }
+
+/* ─── 圆点指示器 ─── */
+.dots {
+  position: absolute;
+  bottom: var(--art-spacing-md);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: var(--art-spacing-sm);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all var(--art-transition);
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.dotActive {
+  background: #fff;
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ─── 计数器 ─── */
+.counter {
+  position: absolute;
+  bottom: var(--art-spacing-md);
+  right: var(--art-spacing-md);
+  z-index: 10;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--art-font-size-sm);
+  font-family: var(--art-font-mono);
+}
+
+@media (max-width: 768px) {
+  .arrow { opacity: 1; width: 36px; height: 36px; font-size: 1rem; }
+  .arrowPrev { left: var(--art-spacing-sm); }
+  .arrowNext { right: var(--art-spacing-sm); }
+}

@@ -1,0 +1,40 @@
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring {
+  border-radius: 50%;
+  border-style: solid;
+  border-color: var(--art-color-border);
+  border-top-color: var(--art-color-accent);
+  animation: spin 0.7s linear infinite;
+}
+
+.sm .ring { width: 16px; height: 16px; border-width: 2px; }
+.md .ring { width: 32px; height: 32px; border-width: 3px; }
+.lg .ring { width: 48px; height: 48px; border-width: 4px; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── 全屏居中 ─── */
+.fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--art-color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--art-spacing-md);
+}
+
+.text {
+  font-size: var(--art-font-size-sm);
+  color: var(--art-color-text-muted);
+  letter-spacing: var(--art-letter-spacing-wide);
+}

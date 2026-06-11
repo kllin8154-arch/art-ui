@@ -1,0 +1,3 @@
+import React,{useState}from'react';import styles from'./CodeBlock.module.css';
+interface CodeBlockProps{code:string;language?:string;className?:string}
+export function CodeBlock({code,language,className=''}:CodeBlockProps){const[copied,setCopied]=useState(false);const copy=async()=>{await navigator.clipboard.writeText(code);setCopied(true);setTimeout(()=>setCopied(false),2000)};return <div className={`${styles.wrap} ${className}`}><div className={styles.header}><span className={styles.lang}>{language||'code'}</span><button className={styles.copy} onClick={copy}>{copied?'✓ 已复制':'📋 复制'}</button></div><pre className={styles.code}><code>{code}</code></pre></div>;}

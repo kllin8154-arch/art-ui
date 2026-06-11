@@ -1,0 +1,2 @@
+import React from'react';interface QrCodeProps{url:string;size?:number;className?:string}
+export function QrCode({url,size=160,className=''}:QrCodeProps){const src=`https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(url)}&margin=8`;return <div className={className} style={{padding:16,background:'#fff',borderRadius:12,display:'inline-flex'}}><img src={src} alt="QR" width={size} height={size}/></div>;}

@@ -1,0 +1,101 @@
+.card {
+  position: relative;
+  background: var(--art-color-surface);
+  border: 1px solid var(--art-color-border-subtle);
+  border-radius: var(--art-radius-lg);
+  overflow: hidden;
+  transition: all var(--art-transition);
+}
+
+/* ─── 图片区域 ─── */
+.imageWrap {
+  position: relative;
+  overflow: hidden;
+  background: var(--art-color-bg-secondary);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--art-transition-slow);
+}
+
+/* ─── 内容区域 ─── */
+.body {
+  padding: var(--art-spacing-lg);
+}
+
+.title {
+  font-family: var(--art-font-display);
+  font-size: var(--art-font-size-lg);
+  font-weight: var(--art-font-weight-bold);
+  color: var(--art-color-text);
+  margin-bottom: var(--art-spacing-xs);
+}
+
+.subtitle {
+  font-size: var(--art-font-size-sm);
+  color: var(--art-color-text-muted);
+  margin-bottom: var(--art-spacing-sm);
+}
+
+.description {
+  font-size: var(--art-font-size-sm);
+  color: var(--art-color-text-secondary);
+  line-height: var(--art-line-height-normal);
+}
+
+/* ─── 标签 ─── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--art-spacing-xs);
+  margin-top: var(--art-spacing-md);
+}
+
+.tag {
+  font-size: var(--art-font-size-xs);
+  color: var(--art-color-text-muted);
+  padding: 0.2rem 0.6rem;
+  background: var(--art-color-bg-secondary);
+  border-radius: var(--art-radius-full);
+}
+
+/* ─── 徽章 ─── */
+.badge {
+  position: absolute;
+  top: var(--art-spacing-sm);
+  left: var(--art-spacing-sm);
+  z-index: 1;
+  font-size: var(--art-font-size-xs);
+  padding: 0.25rem 0.75rem;
+  background: var(--art-color-accent);
+  color: #fff;
+  border-radius: var(--art-radius-full);
+  letter-spacing: var(--art-letter-spacing-wide);
+}
+
+/* ─── 悬停效果 ─── */
+.hoverLift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--art-shadow-lg);
+  border-color: var(--art-color-border);
+}
+
+.hoverLift:hover .image {
+  transform: scale(1.05);
+}
+
+.hoverZoom:hover .image {
+  transform: scale(1.08);
+}
+
+.hoverGlow:hover {
+  box-shadow: 0 0 0 2px var(--art-color-accent), var(--art-shadow-lg);
+}
+
+/* ─── 可点击 ─── */
+.clickable {
+  cursor: pointer;
+}

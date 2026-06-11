@@ -1,0 +1,140 @@
+.nav {
+  width: 100%;
+  z-index: 1000;
+  transition: all var(--art-transition);
+}
+
+/* ─── 定位 ─── */
+.fixed { position: fixed; top: 0; left: 0; right: 0; }
+.sticky { position: sticky; top: 0; }
+.static { position: static; }
+
+/* ─── 透明/毛玻璃 ─── */
+.transparent {
+  background: transparent;
+}
+
+.blur {
+  backdrop-filter: blur(16px);
+  background: color-mix(in srgb, var(--art-color-bg) 75%, transparent);
+  border-bottom: 1px solid var(--art-color-border-subtle);
+}
+
+/* ─── 内部容器 ─── */
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--art-spacing-md) var(--art-spacing-xl);
+  height: 64px;
+}
+
+/* ─── Logo ─── */
+.logo {
+  flex-shrink: 0;
+}
+
+/* ─── 菜单项 ─── */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: var(--art-spacing-lg);
+}
+
+.menuItem {
+  font-size: var(--art-font-size-sm);
+  color: var(--art-color-text-secondary);
+  cursor: pointer;
+  padding: var(--art-spacing-xs) 0;
+  position: relative;
+  transition: color var(--art-transition);
+}
+
+.menuItem::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--art-color-accent);
+  transition: width var(--art-transition);
+}
+
+.menuItem:hover,
+.menuItemActive {
+  color: var(--art-color-text);
+}
+
+.menuItem:hover::after,
+.menuItemActive::after {
+  width: 100%;
+}
+
+/* ─── 移动端菜单按钮 ─── */
+.menuBtn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+  padding: var(--art-spacing-sm);
+}
+
+.menuBtn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--art-color-text);
+  transition: all var(--art-transition);
+  border-radius: 1px;
+}
+
+.menuOpen .menuBtn span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menuOpen .menuBtn span:nth-child(2) {
+  opacity: 0;
+}
+.menuOpen .menuBtn span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ─── 移动端菜单面板 ─── */
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu { display: none; }
+  .menuBtn { display: flex; }
+  .action { display: none; }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    background: var(--art-color-bg);
+    z-index: 999;
+    padding: 100px var(--art-spacing-xl) var(--art-spacing-xl);
+    gap: var(--art-spacing-lg);
+    animation: slideDown 0.3s ease;
+  }
+
+  .mobileMenuItem {
+    font-size: var(--art-font-size-xl);
+    font-family: var(--art-font-display);
+    color: var(--art-color-text);
+    padding: var(--art-spacing-sm) 0;
+    border-bottom: 1px solid var(--art-color-border-subtle);
+    cursor: pointer;
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

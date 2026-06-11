@@ -1,0 +1,1 @@
+.item{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease}.item.visible{opacity:1;transform:translateY(0)}

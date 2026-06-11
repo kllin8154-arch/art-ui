@@ -1,0 +1,146 @@
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: var(--art-font-display);
+  line-height: var(--art-line-height-tight);
+  letter-spacing: var(--art-letter-spacing-tight);
+  color: var(--art-color-text);
+}
+
+.h1 {
+  font-size: var(--art-font-size-5xl);
+  font-weight: var(--art-font-weight-bold);
+  letter-spacing: -0.03em;
+}
+
+.h2 {
+  font-size: var(--art-font-size-4xl);
+  font-weight: var(--art-font-weight-bold);
+}
+
+.h3 {
+  font-size: var(--art-font-size-3xl);
+  font-weight: var(--art-font-weight-bold);
+}
+
+.h4 {
+  font-size: var(--art-font-size-2xl);
+  font-weight: var(--art-font-weight-medium);
+}
+
+.h5 {
+  font-size: var(--art-font-size-xl);
+  font-weight: var(--art-font-weight-medium);
+}
+
+.h6 {
+  font-size: var(--art-font-size-lg);
+  font-weight: var(--art-font-weight-medium);
+}
+
+/* ─── 正文/段落 ─── */
+.text {
+  font-family: var(--art-font-body);
+  font-size: var(--art-font-size-base);
+  line-height: var(--art-line-height-normal);
+  color: var(--art-color-text-secondary);
+}
+
+.textLg {
+  font-size: var(--art-font-size-lg);
+}
+
+.textSm {
+  font-size: var(--art-font-size-sm);
+}
+
+.textXs {
+  font-size: var(--art-font-size-xs);
+}
+
+/* ─── 展示文本 (大号装饰文字) ─── */
+.display {
+  font-family: var(--art-font-display);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: var(--art-font-weight-bold);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+/* ─── 引用块 ─── */
+.blockquote {
+  font-family: var(--art-font-display);
+  font-size: var(--art-font-size-2xl);
+  font-style: italic;
+  line-height: var(--art-line-height-relaxed);
+  color: var(--art-color-text);
+  border-left: 3px solid var(--art-color-accent);
+  padding-left: var(--art-spacing-lg);
+  margin: var(--art-spacing-xl) 0;
+}
+
+/* ─── 标注/说明文字 ─── */
+.caption {
+  font-family: var(--art-font-body);
+  font-size: var(--art-font-size-xs);
+  color: var(--art-color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--art-letter-spacing-wide);
+}
+
+/* ─── 装饰性首字母大写 ─── */
+.lead {
+  font-family: var(--art-font-display);
+  font-size: var(--art-font-size-xl);
+  line-height: var(--art-line-height-relaxed);
+  color: var(--art-color-text-secondary);
+}
+
+/* ─── 手写体 / 签名 ─── */
+.signature {
+  font-family: 'Caveat', 'Ma Shan Zheng', 'Kalam', 'Dancing Script', 'Brush Script MT', cursive;
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--art-color-text);
+  letter-spacing: 0.01em;
+}
+
+.handwriting {
+  font-family: 'Caveat', 'Ma Shan Zheng', 'Kalam', 'Dancing Script', 'Comic Sans MS', cursive;
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--art-color-text-secondary);
+  letter-spacing: 0.02em;
+}
+
+/* ─── 装饰性艺术文本 ─── */
+.decorative {
+  font-family: var(--art-font-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--art-color-text);
+}
+
+.decorative::first-letter {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: var(--art-color-accent);
+  float: left;
+  margin-right: 0.15em;
+  line-height: 0.8;
+}
+
+/* ─── 对齐 ─── */
+.left { text-align: left; }
+.center { text-align: center; }
+.right { text-align: right; }
+.muted { color: var(--art-color-text-muted); }
+.accent { color: var(--art-color-accent); }

@@ -1,0 +1,15 @@
+.tl{position:relative;padding-left:40px}
+.tl::before{content:'';position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--art-color-border)}
+.item{position:relative;margin-bottom:32px}
+.item:last-child{margin-bottom:0}
+.dot{position:absolute;left:-40px;top:4px;width:24px;height:24px;border-radius:50%;background:var(--art-color-surface);border:2px solid var(--art-color-accent);z-index:1;display:flex;align-items:center;justify-content:center;font-size:.65rem}
+.dot::after{content:'';position:absolute;width:8px;height:8px;border-radius:50%;background:var(--art-color-accent)}
+.date{font-size:.75rem;color:var(--art-color-text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.title{font-family:var(--art-font-display);font-size:1.1rem;font-weight:700;color:var(--art-color-text);margin-bottom:4px}
+.desc{font-size:.9rem;color:var(--art-color-text-secondary);line-height:1.6}
+/* 交替布局 (宽屏) */
+@media(min-width:768px){.tlAlt{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tlAlt .item:nth-child(odd){grid-column:1;text-align:right;padding-right:48px}
+.tlAlt .item:nth-child(even){grid-column:2;padding-left:48px}
+.tlAlt .item:nth-child(odd) .dot{left:auto;right:-12px}
+.tlAlt .item:nth-child(even) .dot{left:-12px}}

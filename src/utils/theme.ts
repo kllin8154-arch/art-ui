@@ -1,0 +1,93 @@
+import type { Theme } from '../types';
+
+export const lightTheme: Theme = {
+  mode: 'light',
+  colors: {
+    background: '#faf8f5',
+    backgroundSecondary: '#f3efe9',
+    surface: '#ffffff',
+    surfaceHover: '#f7f5f0',
+    text: '#1a1a1a',
+    textSecondary: '#5c5c5c',
+    textMuted: '#9a9a9a',
+    accent: '#8b5e3c',
+    accentHover: '#6d4a2e',
+    border: '#e0d9cf',
+    borderSubtle: '#ede7de',
+    shadow: 'rgba(0, 0, 0, 0.06)',
+    shadowStrong: 'rgba(0, 0, 0, 0.12)',
+    overlay: 'rgba(10, 10, 10, 0.6)',
+  },
+  typography: {
+    fontDisplay: '"Playfair Display", "Cormorant Garamond", "Noto Serif SC", Georgia, serif',
+    fontBody: '"Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif',
+    fontMono: '"JetBrains Mono", "Cascadia Code", "Fira Code", Consolas, monospace',
+    fontSizeXs: '0.75rem',
+    fontSizeSm: '0.875rem',
+    fontSizeBase: '1rem',
+    fontSizeLg: '1.125rem',
+    fontSizeXl: '1.25rem',
+    fontSize2xl: '1.5rem',
+    fontSize3xl: '2rem',
+    fontSize4xl: '2.5rem',
+    fontSize5xl: '3.5rem',
+    fontWeightLight: 300,
+    fontWeightNormal: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 700,
+    lineHeightTight: 1.15,
+    lineHeightNormal: 1.6,
+    lineHeightRelaxed: 1.8,
+    letterSpacingTight: '-0.02em',
+    letterSpacingNormal: '0',
+    letterSpacingWide: '0.05em',
+  },
+  spacing: {
+    xs: '0.25rem',
+    sm: '0.5rem',
+    md: '1rem',
+    lg: '1.5rem',
+    xl: '2rem',
+    '2xl': '3rem',
+    '3xl': '4rem',
+    '4xl': '6rem',
+    '5xl': '8rem',
+  },
+  radius: {
+    xs: '2px',
+    sm: '4px',
+    md: '8px',
+    lg: '12px',
+    xl: '16px',
+    '2xl': '24px',
+    full: '9999px',
+  },
+  transition: '0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  transitionSlow: '0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+};
+
+export const darkTheme: Theme = {
+  ...lightTheme,
+  mode: 'dark',
+  colors: {
+    background: '#12100e',
+    backgroundSecondary: '#1c1a16',
+    surface: '#24221e',
+    surfaceHover: '#2e2b26',
+    text: '#e8e4de',
+    textSecondary: '#a09888',
+    textMuted: '#6b6358',
+    accent: '#c4946c',
+    accentHover: '#d4a87e',
+    border: '#3a3530',
+    borderSubtle: '#2a2622',
+    shadow: 'rgba(0, 0, 0, 0.3)',
+    shadowStrong: 'rgba(0, 0, 0, 0.5)',
+    overlay: 'rgba(0, 0, 0, 0.75)',
+  },
+};
+
+/** 根据模式获取主题 */
+export function getTheme(mode: 'light' | 'dark'): Theme {
+  return mode === 'dark' ? darkTheme : lightTheme;
+}

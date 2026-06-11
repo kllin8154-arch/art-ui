@@ -1,0 +1,8 @@
+.wrap{position:relative;width:100%;overflow:hidden;border-radius:var(--art-radius-lg);user-select:none;cursor:ew-resize;background:var(--art-color-bg-secondary)}
+.img{width:100%;display:block;height:auto}
+.after{position:absolute;top:0;left:0;width:50%;height:100%;overflow:hidden}
+.after img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;max-width:none;min-width:100%}
+.handle{position:absolute;top:0;bottom:0;width:4px;background:#fff;box-shadow:var(--shadow-lg);cursor:ew-resize;z-index:2}
+.handleBtn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:#fff;box-shadow:var(--shadow-md);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--art-color-text);border:1px solid var(--art-color-border)}
+.overlayLabel{position:absolute;bottom:16px;padding:4px 14px;border-radius:20px;font-size:.8rem;color:#fff;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);pointer-events:none}
+.beforeLabel{left:16px}.afterLabel{right:16px}

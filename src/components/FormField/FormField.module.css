@@ -1,0 +1,1 @@
+.wrap{display:flex;flex-direction:column;gap:4px}.label{font-size:.85rem;font-weight:500;color:var(--art-color-text)}.required{color:#e53935}.error{font-size:.75rem;color:#e53935;margin-top:2px}

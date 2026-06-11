@@ -1,0 +1,6 @@
+.wrap{width:100%;overflow:hidden;position:relative;padding:12px 0}
+.track{display:flex;gap:48px;animation:scroll 20s linear infinite;white-space:nowrap;width:max-content}
+.track:hover{animation-play-state:paused}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.item{font-family:var(--art-font-display);font-size:1.1rem;color:var(--art-color-text-secondary);letter-spacing:.05em}
+.accent{color:var(--art-color-accent)}

@@ -1,0 +1,88 @@
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── 背景图/视频 ─── */
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bgVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── 叠加层 ─── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--art-color-overlay);
+}
+
+/* ─── 内容 ─── */
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: var(--art-spacing-2xl);
+  text-align: center;
+  color: #fff;
+  animation: heroFadeUp 0.8s ease-out;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── 对齐 ─── */
+.alignLeft .content {
+  text-align: left;
+  margin-right: auto;
+  padding-left: var(--art-spacing-4xl);
+}
+
+.alignRight .content {
+  text-align: right;
+  margin-left: auto;
+  padding-right: var(--art-spacing-4xl);
+}
+
+/* ─── 垂直对齐 ─── */
+.valignTop {
+  align-items: flex-start;
+}
+.valignBottom {
+  align-items: flex-end;
+}
+
+@media (max-width: 768px) {
+  .alignLeft .content,
+  .alignRight .content {
+    padding-left: var(--art-spacing-xl);
+    padding-right: var(--art-spacing-xl);
+    text-align: center;
+    margin: 0 auto;
+  }
+}

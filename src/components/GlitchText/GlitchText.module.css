@@ -1,0 +1,1 @@
+.wrap{position:relative;display:inline-block}.base{position:relative;z-index:1}.slice{position:absolute;top:0;left:0;z-index:0;opacity:0;pointer-events:none;white-space:nowrap}.red{color:#ff0040;text-shadow:-1px 0 red}.cyan{color:#00e5ff;text-shadow:1px 0 cyan}

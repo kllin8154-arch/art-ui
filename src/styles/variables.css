@@ -1,0 +1,106 @@
+/* ============================================
+   ArtUI — Design Tokens & CSS Variables
+   艺术风格设计令牌
+   ============================================ */
+
+:root {
+  /* ─── 排版 Typography ─── */
+  --art-font-display: 'Playfair Display', 'Cormorant Garamond', 'Noto Serif SC', Georgia, 'Times New Roman', serif;
+  --art-font-body: 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+  --art-font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+
+  --art-font-size-xs: 0.75rem;
+  --art-font-size-sm: 0.875rem;
+  --art-font-size-base: 1rem;
+  --art-font-size-lg: 1.125rem;
+  --art-font-size-xl: 1.25rem;
+  --art-font-size-2xl: 1.5rem;
+  --art-font-size-3xl: 2rem;
+  --art-font-size-4xl: 2.5rem;
+  --art-font-size-5xl: 3.5rem;
+
+  --art-font-weight-light: 300;
+  --art-font-weight-normal: 400;
+  --art-font-weight-medium: 500;
+  --art-font-weight-bold: 700;
+
+  --art-line-height-tight: 1.15;
+  --art-line-height-normal: 1.6;
+  --art-line-height-relaxed: 1.8;
+
+  --art-letter-spacing-tight: -0.02em;
+  --art-letter-spacing-normal: 0;
+  --art-letter-spacing-wide: 0.05em;
+
+  /* ─── 间距 Spacing ─── */
+  --art-spacing-xs: 0.25rem;
+  --art-spacing-sm: 0.5rem;
+  --art-spacing-md: 1rem;
+  --art-spacing-lg: 1.5rem;
+  --art-spacing-xl: 2rem;
+  --art-spacing-2xl: 3rem;
+  --art-spacing-3xl: 4rem;
+  --art-spacing-4xl: 6rem;
+  --art-spacing-5xl: 8rem;
+
+  /* ─── 圆角 Border Radius ─── */
+  --art-radius-xs: 2px;
+  --art-radius-sm: 4px;
+  --art-radius-md: 8px;
+  --art-radius-lg: 12px;
+  --art-radius-xl: 16px;
+  --art-radius-2xl: 24px;
+  --art-radius-full: 9999px;
+
+  /* ─── 过渡 Transition ─── */
+  --art-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --art-transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  --art-transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ─── 阴影 Shadows ─── */
+  --art-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --art-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --art-shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --art-shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   Light Theme 浅色主题
+   ============================================ */
+:root,
+[data-art-theme='light'] {
+  --art-color-bg: #faf8f5;
+  --art-color-bg-secondary: #f3efe9;
+  --art-color-surface: #ffffff;
+  --art-color-surface-hover: #f7f5f0;
+  --art-color-text: #1a1a1a;
+  --art-color-text-secondary: #5c5c5c;
+  --art-color-text-muted: #9a9a9a;
+  --art-color-accent: #8b5e3c;
+  --art-color-accent-hover: #6d4a2e;
+  --art-color-border: #e0d9cf;
+  --art-color-border-subtle: #ede7de;
+  --art-color-shadow: rgba(0, 0, 0, 0.06);
+  --art-color-shadow-strong: rgba(0, 0, 0, 0.12);
+  --art-color-overlay: rgba(10, 10, 10, 0.6);
+}
+
+/* ============================================
+   Dark Theme 深色主题
+   ============================================ */
+[data-art-theme='dark'] {
+  --art-color-bg: #12100e;
+  --art-color-bg-secondary: #1c1a16;
+  --art-color-surface: #24221e;
+  --art-color-surface-hover: #2e2b26;
+  --art-color-text: #e8e4de;
+  --art-color-text-secondary: #a09888;
+  --art-color-text-muted: #6b6358;
+  --art-color-accent: #c4946c;
+  --art-color-accent-hover: #d4a87e;
+  --art-color-border: #3a3530;
+  --art-color-border-subtle: #2a2622;
+  --art-color-shadow: rgba(0, 0, 0, 0.3);
+  --art-color-shadow-strong: rgba(0, 0, 0, 0.5);
+  --art-color-overlay: rgba(0, 0, 0, 0.75);
+}

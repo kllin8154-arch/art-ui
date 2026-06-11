@@ -1,0 +1,28 @@
+.themeProvider {
+  min-height: 100vh;
+}
+
+.themeToggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--art-color-surface);
+  border: 1px solid var(--art-color-border);
+  color: var(--art-color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--art-shadow-md);
+  transition: all var(--art-transition);
+  font-size: 1.2rem;
+}
+
+.themeToggle:hover {
+  transform: scale(1.1);
+  box-shadow: var(--art-shadow-lg);
+}

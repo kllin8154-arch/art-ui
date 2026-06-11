@@ -1,0 +1,6 @@
+.avatar{position:relative;display:inline-flex;border-radius:50%;overflow:hidden;background:var(--art-color-bg-secondary);flex-shrink:0}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.sm{width:32px;height:32px}.md{width:48px;height:48px}.lg{width:72px;height:72px}.xl{width:112px;height:112px}
+.status{position:absolute;bottom:2px;right:2px;width:10px;height:10px;border-radius:50%;border:2px solid var(--art-color-surface)}
+.online{background:#4caf50}.offline{background:#9e9e9e}.away{background:#ff9800}
+.fallback{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:var(--art-font-display);font-weight:700;color:var(--art-color-text-muted);text-transform:uppercase}
