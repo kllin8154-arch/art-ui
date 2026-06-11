@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-art-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ArtUI Batch 12–13 — 组件审核</title>
+<style>
+:root,[data-art-theme="light"]{
+  --bg:#faf8f5;--bg2:#f3efe9;--surface:#fff;--text:#1a1a1a;
+  --text2:#5c5c5c;--textM:#9a9a9a;--accent:#8b5e3c;--accentL:#c4946c;
+  --border:#e0d9cf;--borderS:#ede7de;--green:#16a34a;--red:#dc2626;--amber:#d97706;
+  --greenBg:#f0fdf4;--redBg:#fef2f2;--amberBg:#fffbeb;
+  --fontD:'Georgia','Noto Serif SC',serif;--fontB:'Segoe UI','PingFang SC',sans-serif;
+  --radius:14px;--radiusSm:8px;
+}
+[data-art-theme="dark"]{
+  --bg:#12100e;--bg2:#1c1a16;--surface:#24221e;--text:#e8e4de;
+  --text2:#a09888;--textM:#6b6358;--accent:#c4946c;--accentL:#d4a87e;
+  --border:#3a3530;--borderS:#2a2622;--green:#4ade80;--red:#f87171;--amber:#fbbf24;
+  --greenBg:#052e16;--redBg:#450a0a;--amberBg:#451a03;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);background:var(--bg)}
+
+.topbar{position:sticky;top:0;z-index:2000;background:var(--surface);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.topbar h1{font-family:var(--fontD);font-size:1.15rem;color:var(--accent)}
+.progress{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--text2)}
+.progress-bar{width:160px;height:6px;background:var(--bg2);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);transition:width .4s ease}
+.progress-num{font-weight:600;color:var(--text)}
+.btn-sm{padding:7px 16px;border-radius:var(--radiusSm);border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:.8rem;color:var(--text);font-family:var(--fontB);transition:all .2s;display:inline-flex;align-items:center;gap:5px}
+.btn-sm:hover{background:var(--bg2);border-color:var(--accent)}
+.btn-sm.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:32px 28px;max-width:1440px;margin:0 auto}
+@media(max-width:1020px){.grid{grid-template-columns:1fr}}
+
+.panel{background:var(--surface);border:1px solid var(--borderS);border-radius:var(--radius);overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.panel.passed{border-color:var(--green);box-shadow:0 0 0 1px var(--green)}
+.panel.needsfix{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.panel.failed{border-color:var(--red);box-shadow:0 0 0 1px var(--red)}
+.panel-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--borderS);gap:12px}
+.panel-id{font-size:.66rem;font-weight:700;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);padding:3px 10px;border-radius:10px;flex-shrink:0}
+.panel-id.passed-id{color:var(--green);background:var(--greenBg)}
+.panel-id.needsfix-id{color:var(--amber);background:var(--amberBg)}
+.panel-id.failed-id{color:var(--red);background:var(--redBg)}
+.panel-name{font-family:var(--fontD);font-size:1.05rem;font-weight:700;margin-right:auto}
+.panel-badge{font-size:.66rem;padding:3px 8px;border-radius:8px;font-weight:600;flex-shrink:0}
+.panel-badge.tsx{background:#e0f2fe;color:#0369a1}.panel-badge.css{background:#fce7f3;color:#9d174d}
+[data-art-theme="dark"] .panel-badge.tsx{background:#0c4a6e;color:#7dd3fc}
+[data-art-theme="dark"] .panel-badge.css{background:#500724;color:#f9a8d4}
+.panel-desc{padding:8px 20px 0;font-size:.82rem;color:var(--textM);line-height:1.5}
+.panel-body{padding:20px;flex:1;overflow:auto}
+.panel-foot{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-top:1px solid var(--borderS);gap:10px}
+.btn-rv{padding:7px 14px;border-radius:var(--radiusSm);border:1px solid var(--border);cursor:pointer;font-size:.78rem;font-weight:500;font-family:var(--fontB);transition:all .2s;display:inline-flex;align-items:center;gap:4px}
+.btn-rv.pass{color:var(--green);border-color:var(--green)}.btn-rv.pass:hover,.btn-rv.pass.active{background:var(--green);color:#fff}
+.btn-rv.fix{color:var(--amber);border-color:var(--amber)}.btn-rv.fix:hover,.btn-rv.fix.active{background:var(--amber);color:#fff}
+.btn-rv.fail{color:var(--red);border-color:var(--red)}.btn-rv.fail:hover,.btn-rv.fail.active{background:var(--red);color:#fff}
+.btn-rv.skip{color:var(--textM);border-color:var(--textM)}.btn-rv.skip:hover,.btn-rv.skip.active{background:var(--textM);color:#fff}
+.review-note{font-size:.76rem;color:var(--textM)}
+.act-gap{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.batch-label{font-family:var(--fontD);font-size:.72rem;color:var(--accent);padding:6px 16px;border-bottom:1px solid var(--borderS);text-align:center;grid-column:1/-1;margin-bottom:-20px}
+
+/* ─── Kbd ─── */
+.kbd{display:inline-flex;align-items:center;justify-content:center;font-family:'SF Mono','Consolas',monospace;font-weight:500;color:var(--text);background:var(--bg2);border:1px solid var(--border);border-bottom-width:2px;border-radius:5px;line-height:1}.kbd-sm{padding:2px 6px;font-size:.7rem}.kbd-md{padding:3px 8px;font-size:.78rem}.kbd-lg{padding:5px 10px;font-size:.85rem}
+
+/* ─── Combobox ─── */
+.cb-wrap{position:relative;max-width:320px;font-family:var(--fontB)}
+.cb-ctrl{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radiusSm);background:var(--surface);cursor:pointer;min-height:40px}
+.cb-ctrl:hover{border-color:var(--accent)}
+.cb-display{font-size:.9rem;color:var(--text)}.cb-ph{color:var(--textM)}
+.cb-input{flex:1;border:none;outline:none;background:transparent;font-size:.9rem;color:var(--text);font-family:var(--fontB)}
+.cb-chev{color:var(--textM);transition:transform .25s}.cb-chev.open{transform:rotate(180deg)}
+.cb-drop{position:absolute;top:100%;left:0;right:0;margin-top:4px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radiusSm);box-shadow:0 8px 24px rgba(0,0,0,.1);max-height:200px;overflow:auto;z-index:100;display:none;animation:cbIn .15s ease}
+.cb-drop.show{display:block}@keyframes cbIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.cb-opt{padding:9px 14px;font-size:.89rem;cursor:pointer}.cb-opt:hover{background:var(--bg2)}.cb-opt.sel{color:var(--accent);font-weight:600}
+
+/* ─── MultiSelect ─── */
+.ms-wrap{position:relative;max-width:360px}
+.ms-ctrl{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radiusSm);background:var(--surface);cursor:pointer;min-height:42px}
+.ms-ctrl:hover{border-color:var(--accent)}
+.ms-chips{flex:1;display:flex;flex-wrap:wrap;gap:5px;min-width:0}
+.ms-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:16px;font-size:.78rem;font-weight:500;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent)}
+.ms-chip-x{background:transparent;border:none;cursor:pointer;color:inherit;opacity:.6;font-size:1rem;line-height:1;padding:0}.ms-chip-x:hover{opacity:1}
+.ms-ph{font-size:.88rem;color:var(--textM)}
+.ms-chev{color:var(--textM);transition:transform .25s;flex-shrink:0}.ms-chev.open{transform:rotate(180deg)}
+.ms-drop{position:absolute;top:100%;left:0;right:0;margin-top:4px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radiusSm);box-shadow:0 8px 24px rgba(0,0,0,.1);z-index:100;display:none;animation:cbIn .15s ease}
+.ms-drop.show{display:block}
+.ms-opt{padding:9px 14px;font-size:.89rem;cursor:pointer;display:flex;align-items:center;gap:8px}.ms-opt:hover{background:var(--bg2)}.ms-opt.sel{color:var(--accent);font-weight:500}
+.ms-chk{width:16px;font-size:.8rem;color:var(--accent)}
+
+/* ─── ToggleGroup ─── */
+.tg{display:inline-flex;border:1px solid var(--border);border-radius:var(--radiusSm);overflow:hidden;background:var(--bg2)}
+.tg-btn{padding:8px 16px;border:none;border-right:1px solid var(--border);background:transparent;cursor:pointer;font-size:.86rem;font-family:var(--fontB);color:var(--text2);transition:all .2s}.tg-btn:last-child{border-right:none}
+.tg-btn:hover{background:var(--surface);color:var(--text)}.tg-btn.active{background:var(--accent);color:#fff!important}
+
+/* ─── Sheet ─── */
+.sh-overlay{position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,.35);display:none}.sh-overlay.show{display:block}
+.sh-panel{position:fixed;z-index:1101;right:0;top:0;bottom:0;width:400px;max-width:90vw;background:var(--surface);box-shadow:0 8px 40px rgba(0,0,0,.18);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.sh-panel.show{transform:translateX(0)}
+.sh-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--borderS)}
+.sh-title{font-family:var(--fontD);font-size:1.05rem;font-weight:700;color:var(--text)}
+.sh-close{background:transparent;border:none;cursor:pointer;color:var(--textM);padding:4px;border-radius:6px}.sh-close:hover{background:var(--bg2);color:var(--text)}
+.sh-body{padding:20px;flex:1;overflow:auto}
+.sh-trigger{padding:10px 20px;background:var(--accent);color:#fff;border:none;border-radius:var(--radiusSm);cursor:pointer;font-size:.88rem;font-family:var(--fontB)}
+
+/* ─── RingProgress ─── */
+.rp{position:relative;display:inline-flex;align-items:center;justify-content:center}
+.rp svg{transform:rotate(-90deg)}
+.rp-track{fill:none;stroke:var(--bg2)}
+.rp-fill{fill:none;stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+.rp-center{position:absolute;display:flex;flex-direction:column;align-items:center;text-align:center}
+.rp-val{font-size:1.2em;font-weight:700;color:var(--text);line-height:1}
+.rp-lbl{font-size:.7em;color:var(--textM);margin-top:2px}
+
+/* ─── Badge ─── */
+.bdg{display:inline-flex;align-items:center;justify-content:center;font-weight:600;border-radius:99px;padding:2px 10px;font-size:.75rem;height:22px;font-family:var(--fontB)}
+.bdg-dfl{background:var(--bg2);color:var(--text2)}
+.bdg-acc{background:var(--accent);color:#fff}
+.bdg-ok{background:#ecfdf5;color:#065f46}
+.bdg-warn{background:#fffbeb;color:#92400e}
+.bdg-err{background:#fef2f2;color:#991b1b}
+[data-art-theme="dark"] .bdg-ok{background:#052e16;color:#86efac}
+[data-art-theme="dark"] .bdg-warn{background:#451a03;color:#fde68a}
+[data-art-theme="dark"] .bdg-err{background:#450a0a;color:#fca5a5}
+
+/* ─── Layout components ─── */
+.ly-box{background:color-mix(in srgb,var(--accent) 15%,transparent);border:1px dashed var(--accent);border-radius:6px;padding:10px 14px;font-size:.8rem;color:var(--accent);text-align:center;min-width:60px}
+.ly-stack-demo{display:flex;gap:12px;flex-direction:column}
+.ly-stack-demo.row{flex-direction:row}
+.ly-grid-demo{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ly-paper-stack{display:flex;flex-direction:column;gap:12px}
+.ly-paper{background:var(--surface);border:1px solid var(--borderS);border-radius:var(--radiusSm);padding:14px;font-size:.85rem}
+.ly-paper.sm{box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.ly-paper.md{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.ly-paper.lg{box-shadow:0 12px 32px rgba(0,0,0,.14)}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <h1>ArtUI &middot; Batch 12–13 审核</h1>
+    <div class="progress"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><span><span class="progress-num" id="passedCount">0</span>/13 通过</span></div>
+  </div>
+  <div class="topbar-actions">
+    <button class="btn-sm primary" onclick="allPass()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>全部通过</button>
+    <button class="btn-sm" onclick="resetAll()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v5h5"/></svg>重置</button>
+    <button class="btn-sm" onclick="toggleTheme()" id="themeBtn"><svg id="tSun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><svg id="tMoon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg><span id="tLabel">深色</span></button>
+  </div>
+</header>
+
+<div class="batch-label">Batch 12 — 中优先级组件</div>
+<div class="grid">
+
+<!-- Kbd -->
+<div class="panel" id="p-117"><div class="panel-hdr"><span class="panel-id" id="badge-117">#117</span><span class="panel-name">Kbd</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">键盘快捷键展示 &middot; 3 档尺寸 sm/md/lg &middot; monospace</div><div class="panel-body"><div class="act-gap"><kbd class="kbd kbd-sm">Ctrl</kbd>+<kbd class="kbd kbd-sm">K</kbd></div><div class="act-gap" style="margin-top:12px"><kbd class="kbd kbd-md">&#8984;</kbd>+<kbd class="kbd kbd-md">Shift</kbd>+<kbd class="kbd kbd-md">P</kbd></div><div class="act-gap" style="margin-top:12px"><kbd class="kbd kbd-lg">Enter</kbd></div></div><div class="panel-foot"><div class="review-actions" data-cid="117"><button class="btn-rv pass" onclick="rv('117','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('117','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('117','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-117"></span></div></div>
+
+<!-- VisuallyHidden -->
+<div class="panel" id="p-118"><div class="panel-hdr"><span class="panel-id" id="badge-118">#118</span><span class="panel-name">VisuallyHidden</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">屏幕阅读器专用 &middot; clip 裁剪 &middot; 可自定义标签 as prop</div><div class="panel-body"><p style="font-size:.88rem;color:var(--text2)">下方有一<span style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">屏幕阅读器专属文字</span>段屏幕阅读器可见但视觉隐藏的文字（审查元素可查看）。</p><div style="margin-top:12px;padding:10px 14px;background:var(--bg2);border-radius:6px;font-size:.78rem;color:var(--textM);font-family:monospace">&lt;VisuallyHidden&gt;此内容仅屏幕阅读器可读&lt;/VisuallyHidden&gt;</div></div><div class="panel-foot"><div class="review-actions" data-cid="118"><button class="btn-rv pass" onclick="rv('118','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('118','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('118','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-118"></span></div></div>
+
+<!-- Combobox -->
+<div class="panel" id="p-119"><div class="panel-hdr"><span class="panel-id" id="badge-119">#119</span><span class="panel-name">Combobox</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">可搜索下拉 &middot; 键盘导航 &middot; 可清除 &middot; 受控/非受控</div><div class="panel-body"><div class="cb-wrap" id="cbDemo"><div class="cb-ctrl" onclick="cbOpen()"><span class="cb-display" id="cbDisplay"><span class="cb-ph">选择框架...</span></span><input class="cb-input" id="cbInput" style="display:none" onkeydown="cbKey(event)" oninput="cbFilter()" placeholder="选择框架..."><svg class="cb-chev" id="cbChev" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg></div><div class="cb-drop" id="cbDrop"></div></div></div><div class="panel-foot"><div class="review-actions" data-cid="119"><button class="btn-rv pass" onclick="rv('119','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('119','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('119','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-119"></span></div></div>
+
+<!-- MultiSelect -->
+<div class="panel" id="p-120"><div class="panel-hdr"><span class="panel-id" id="badge-120">#120</span><span class="panel-name">MultiSelect</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">多选下拉 &middot; Chip 标签展示 &middot; 可搜索过滤 &middot; 点击 X 移除</div><div class="panel-body"><div class="ms-wrap" id="msDemo"><div class="ms-ctrl" onclick="msOpen()"><div class="ms-chips" id="msChips"><span class="ms-ph">选择标签...</span></div><svg class="ms-chev" id="msChev" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg></div><div class="ms-drop" id="msDrop"></div></div></div><div class="panel-foot"><div class="review-actions" data-cid="120"><button class="btn-rv pass" onclick="rv('120','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('120','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('120','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-120"></span></div></div>
+
+<!-- ToggleGroup -->
+<div class="panel" id="p-121"><div class="panel-hdr"><span class="panel-id" id="badge-121">#121</span><span class="panel-name">ToggleGroup</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">切换按钮组 &middot; 单选/多选 &middot; 受控/非受控 &middot; disabled 项</div><div class="panel-body"><p style="font-size:.8rem;color:var(--textM);margin-bottom:10px">单选：</p><div class="tg" id="tg1"><button class="tg-btn active" onclick="tgToggle('tg1',this,false)">日</button><button class="tg-btn" onclick="tgToggle('tg1',this,false)">周</button><button class="tg-btn" onclick="tgToggle('tg1',this,false)">月</button><button class="tg-btn" onclick="tgToggle('tg1',this,false)">年</button></div><p style="font-size:.8rem;color:var(--textM);margin:14px 0 8px">多选：</p><div class="tg" id="tg2"><button class="tg-btn" onclick="tgToggle('tg2',this,true)">B</button><button class="tg-btn" onclick="tgToggle('tg2',this,true)">I</button><button class="tg-btn" onclick="tgToggle('tg2',this,true)">U</button></div></div><div class="panel-foot"><div class="review-actions" data-cid="121"><button class="btn-rv pass" onclick="rv('121','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('121','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('121','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-121"></span></div></div>
+
+<!-- Sheet -->
+<div class="panel" id="p-122"><div class="panel-hdr"><span class="panel-id" id="badge-122">#122</span><span class="panel-name">Sheet</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">屏幕边缘滑入面板 &middot; 4 方向 &middot; Escape/遮罩关闭 &middot; 4 档尺寸</div><div class="panel-body"><button class="sh-trigger" onclick="document.getElementById('shOverlay').classList.add('show');document.getElementById('shPanel').classList.add('show')">打开 Sheet 面板</button><div class="sh-overlay" id="shOverlay" onclick="shClose()"></div><div class="sh-panel" id="shPanel"><div class="sh-hdr"><span class="sh-title">Sheet 面板</span><button class="sh-close" onclick="shClose()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div><div class="sh-body"><p style="font-size:.9rem;line-height:1.7;color:var(--text2)">从屏幕右侧滑入，支持 left/right/top/bottom 四方向 + sm/md/lg/full 四尺寸。</p><p style="font-size:.9rem;line-height:1.7;color:var(--text2);margin-top:12px">按 <kbd class="kbd kbd-sm">Esc</kbd> 或点击遮罩层关闭。</p></div></div></div><div class="panel-foot"><div class="review-actions" data-cid="122"><button class="btn-rv pass" onclick="rv('122','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('122','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('122','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-122"></span></div></div>
+
+<!-- RingProgress -->
+<div class="panel" id="p-123"><div class="panel-hdr"><span class="panel-id" id="badge-123">#123</span><span class="panel-name">RingProgress</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">环形进度 &middot; SVG stroke-dasharray &middot; 自定义尺寸/粗细/颜色/标签</div><div class="panel-body"><div class="act-gap" style="justify-content:space-around"><div class="rp" style="width:90px;height:90px"><svg width="90" height="90" viewBox="0 0 100 100"><circle class="rp-track" cx="50" cy="50" r="42" stroke-width="8"/><circle class="rp-fill" cx="50" cy="50" r="42" stroke-width="8" stroke="var(--accent)" stroke-dasharray="263.89" stroke-dashoffset="52.78"/></svg><div class="rp-center"><span class="rp-val">80%</span><span class="rp-lbl">完成度</span></div></div><div class="rp" style="width:70px;height:70px"><svg width="70" height="70" viewBox="0 0 80 80"><circle class="rp-track" cx="40" cy="40" r="34" stroke-width="6"/><circle class="rp-fill" cx="40" cy="40" r="34" stroke-width="6" stroke="#16a34a" stroke-dasharray="213.63" stroke-dashoffset="106.81"/></svg><div class="rp-center"><span class="rp-val">50%</span></div></div><div class="rp" style="width:55px;height:55px"><svg width="55" height="55" viewBox="0 0 60 60"><circle class="rp-track" cx="30" cy="30" r="25" stroke-width="5"/><circle class="rp-fill" cx="30" cy="30" r="25" stroke-width="5" stroke="#d97706" stroke-dasharray="157.08" stroke-dashoffset="15.71"/></svg><div class="rp-center"><span class="rp-val">90%</span></div></div></div></div><div class="panel-foot"><div class="review-actions" data-cid="123"><button class="btn-rv pass" onclick="rv('123','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('123','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('123','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-123"></span></div></div>
+
+<!-- Badge -->
+<div class="panel" id="p-124"><div class="panel-hdr"><span class="panel-id" id="badge-124">#124</span><span class="panel-name">Badge</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">状态徽章 &middot; 5 种语义色 &middot; dot 点模式 &middot; 暗色主题适配</div><div class="panel-body"><div class="act-gap"><span class="bdg bdg-dfl">Default</span><span class="bdg bdg-acc">Accent</span><span class="bdg bdg-ok">Success</span><span class="bdg bdg-warn">Warning</span><span class="bdg bdg-err">Danger</span></div></div><div class="panel-foot"><div class="review-actions" data-cid="124"><button class="btn-rv pass" onclick="rv('124','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('124','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('124','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-124"></span></div></div>
+
+</div>
+
+<div class="batch-label">Batch 13 — 布局工具</div>
+<div class="grid">
+
+<!-- Group -->
+<div class="panel" id="p-125"><div class="panel-hdr"><span class="panel-id" id="badge-125">#125</span><span class="panel-name">Group</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">Flex 行容器 &middot; gap/align/justify/wrap &middot; 子元素自动间距</div><div class="panel-body"><div class="act-gap" style="gap:12px"><span class="ly-box">A</span><span class="ly-box">B</span><span class="ly-box">C</span><span class="ly-box">D</span></div><p style="margin-top:16px;font-size:.78rem;color:var(--textM)">默认 gap:12px &middot; align:center &middot; 子项均匀分布</p></div><div class="panel-foot"><div class="review-actions" data-cid="125"><button class="btn-rv pass" onclick="rv('125','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('125','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('125','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-125"></span></div></div>
+
+<!-- Stack -->
+<div class="panel" id="p-126"><div class="panel-hdr"><span class="panel-id" id="badge-126">#126</span><span class="panel-name">Stack</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">方向性堆叠 &middot; row/column/reverse &middot; gap 间距 &middot; align/justify</div><div class="panel-body"><div class="ly-stack-demo"><span class="ly-box">垂直 Stack</span><span class="ly-box">项 1</span><span class="ly-box">项 2</span><span class="ly-box">项 3</span></div><div class="ly-stack-demo row" style="margin-top:16px"><span class="ly-box">水平</span><span class="ly-box">Stack</span><span class="ly-box">Row</span></div></div><div class="panel-foot"><div class="review-actions" data-cid="126"><button class="btn-rv pass" onclick="rv('126','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('126','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('126','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-126"></span></div></div>
+
+<!-- Grid (layout) -->
+<div class="panel" id="p-127"><div class="panel-hdr"><span class="panel-id" id="badge-127">#127</span><span class="panel-name">Grid</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">CSS Grid 布局 &middot; cols/rows 列数或模板 &middot; gap/align/justify</div><div class="panel-body"><div class="ly-grid-demo"><span class="ly-box">1</span><span class="ly-box">2</span><span class="ly-box">3</span><span class="ly-box">4</span><span class="ly-box">5</span><span class="ly-box">6</span></div><p style="margin-top:16px;font-size:.78rem;color:var(--textM)">3 列等宽网格 &middot; gap:12px &middot; grid-template-columns: repeat(3,1fr)</p></div><div class="panel-foot"><div class="review-actions" data-cid="127"><button class="btn-rv pass" onclick="rv('127','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('127','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('127','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-127"></span></div></div>
+
+<!-- Center -->
+<div class="panel" id="p-128"><div class="panel-hdr"><span class="panel-id" id="badge-128">#128</span><span class="panel-name">Center</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">居中容器 &middot; flexbox 居中 &middot; inline 内联模式 &middot; 零配置</div><div class="panel-body"><div style="display:flex;align-items:center;justify-content:center;height:100px;background:var(--bg2);border-radius:8px"><span class="ly-box">水平 + 垂直居中</span></div><p style="margin-top:12px;font-size:.78rem;color:var(--textM)">一行代码居中：&lt;Center&gt;内容&lt;/Center&gt; &middot; inline 模式支持内联居中</p></div><div class="panel-foot"><div class="review-actions" data-cid="128"><button class="btn-rv pass" onclick="rv('128','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('128','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('128','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-128"></span></div></div>
+
+<!-- Paper -->
+<div class="panel" id="p-129"><div class="panel-hdr"><span class="panel-id" id="badge-129">#129</span><span class="panel-name">Paper</span><span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span></div><div class="panel-desc">悬浮卡片 &middot; 4 档阴影 &middot; 自定义圆角/内边距 &middot; 暗色适配</div><div class="panel-body"><div class="ly-paper-stack"><div class="ly-paper sm">shadow=sm — 轻微悬浮感</div><div class="ly-paper md">shadow=md — 标准卡片阴影</div><div class="ly-paper lg">shadow=lg — 强调层级</div></div></div><div class="panel-foot"><div class="review-actions" data-cid="129"><button class="btn-rv pass" onclick="rv('129','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>通过</button><button class="btn-rv fix" onclick="rv('129','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>需修复</button><button class="btn-rv fail" onclick="rv('129','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>驳回</button></div><span class="review-note" id="note-129"></span></div></div>
+
+</div>
+
+<script>
+function toggleTheme(){
+  var h=document.documentElement,is=h.getAttribute('data-art-theme')==='dark';
+  h.setAttribute('data-art-theme',is?'light':'dark');
+  document.getElementById('tSun').style.display=is?'inline':'none';
+  document.getElementById('tMoon').style.display=is?'none':'inline';
+  document.getElementById('tLabel').textContent=is?'深色':'浅色';
+}
+function shClose(){document.getElementById('shOverlay').classList.remove('show');document.getElementById('shPanel').classList.remove('show')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')shClose()});
+function tgToggle(gid,btn,multi){
+  if(!multi){btn.parentElement.querySelectorAll('.tg-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active')}
+  else btn.classList.toggle('active');
+}
+
+// Combobox
+var cbOpts=['React','Vue','Angular','Svelte','Solid','Preact','Lit','Qwik','Ember','Backbone'],cbSel=null;
+function cbOpen(){
+  var d=document.getElementById('cbDrop'),inp=document.getElementById('cbInput'),disp=document.getElementById('cbDisplay'),ch=document.getElementById('cbChev');
+  if(d.classList.contains('show')){d.classList.remove('show');inp.style.display='none';disp.style.display='';ch.classList.remove('open');return}
+  inp.style.display='';disp.style.display='none';inp.value='';inp.focus();ch.classList.add('open');cbRender(cbOpts);d.classList.add('show');
+}
+function cbFilter(){cbRender(cbOpts.filter(function(o){return o.toLowerCase().includes(document.getElementById('cbInput').value.toLowerCase())}))}
+function cbRender(list){document.getElementById('cbDrop').innerHTML=list.map(function(o){return'<div class="cb-opt'+(o===cbSel?' sel':'')+'" onclick="cbPick(\''+o+'\')">'+o+'</div>'}).join('');document.getElementById('cbDrop').classList.add('show')}
+function cbPick(v){cbSel=v;document.getElementById('cbDisplay').textContent=v;document.getElementById('cbDisplay').classList.remove('cb-ph');document.getElementById('cbInput').style.display='none';document.getElementById('cbDisplay').style.display='';document.getElementById('cbDrop').classList.remove('show');document.getElementById('cbChev').classList.remove('open')}
+function cbKey(e){if(e.key==='Escape'){document.getElementById('cbDrop').classList.remove('show');document.getElementById('cbInput').style.display='none';document.getElementById('cbDisplay').style.display='';document.getElementById('cbChev').classList.remove('open')}else if(e.key==='Enter'){var f=document.querySelector('#cbDrop .cb-opt');if(f)f.click()}}
+document.addEventListener('click',function(e){var w=document.getElementById('cbDemo');if(w&&!w.contains(e.target)){document.getElementById('cbDrop').classList.remove('show');document.getElementById('cbInput').style.display='none';document.getElementById('cbDisplay').style.display='';document.getElementById('cbChev').classList.remove('open')}});
+
+// MultiSelect
+var msOpts=['Design','Development','Marketing','Sales','Support','Finance','Legal','HR'],msSel=[];
+function msOpen(){var d=document.getElementById('msDrop'),ch=document.getElementById('msChev');if(d.classList.contains('show')){d.classList.remove('show');ch.classList.remove('open');return}ch.classList.add('open');msRenderDrop();d.classList.add('show')}
+function msRenderDrop(){document.getElementById('msDrop').innerHTML=msOpts.map(function(o){var s=msSel.includes(o);return'<div class="ms-opt'+(s?' sel':'')+'" onclick="msToggle(\''+o+'\')"><span class="ms-chk">'+(s?'\u2713':'')+'</span>'+o+'</div>'}).join('')}
+function msToggle(v){if(msSel.includes(v))msSel=msSel.filter(function(x){return x!==v});else msSel.push(v);msRender();msRenderDrop()}
+function msRemove(v){msSel=msSel.filter(function(x){return x!==v});msRender();msRenderDrop()}
+function msRender(){document.getElementById('msChips').innerHTML=msSel.length===0?'<span class="ms-ph">选择标签...</span>':msSel.map(function(v){return'<span class="ms-chip">'+v+'<button class="ms-chip-x" onclick="event.stopPropagation();msRemove(\''+v+'\')">&times;</button></span>'}).join('')}
+document.addEventListener('click',function(e){var w=document.getElementById('msDemo');if(w&&!w.contains(e.target)){document.getElementById('msDrop').classList.remove('show');document.getElementById('msChev').classList.remove('open')}});
+
+// Review
+var state=JSON.parse(localStorage.getItem('artui-batch12-13-review')||'{}');
+function rv(cid,status,btn){
+  state[cid]=status;localStorage.setItem('artui-batch12-13-review',JSON.stringify(state));
+  var p=document.getElementById('p-'+cid);p.classList.remove('passed','needsfix','failed');
+  p.querySelectorAll('.btn-rv').forEach(function(b){b.classList.remove('active')});
+  var bad=document.getElementById('badge-'+cid);bad.classList.remove('passed-id','needsfix-id','failed-id');
+  if(status==='pass'){p.classList.add('passed');bad.classList.add('passed-id')}
+  else if(status==='needsfix'){p.classList.add('needsfix');bad.classList.add('needsfix-id')}
+  else if(status==='fail'){p.classList.add('failed');bad.classList.add('failed-id')}
+  btn.classList.add('active');
+  document.getElementById('note-'+cid).textContent=status==='pass'?'已通过':status==='needsfix'?'需修复':'已驳回';
+  updateProgress();
+}
+function updateProgress(){var p=0;for(var k in state){if(state[k]==='pass')p++}document.getElementById('passedCount').textContent=p;document.getElementById('progressFill').style.width=(p/13*100)+'%'}
+function allPass(){['117','118','119','120','121','122','123','124','125','126','127','128','129'].forEach(function(id){rv(id,'pass',document.querySelector('[data-cid="'+id+'"] .btn-rv.pass'))})}
+function resetAll(){localStorage.removeItem('artui-batch12-13-review');state={};['117','118','119','120','121','122','123','124','125','126','127','128','129'].forEach(function(id){var p=document.getElementById('p-'+id);p.classList.remove('passed','needsfix','failed');p.querySelectorAll('.btn-rv').forEach(function(b){b.classList.remove('active')});document.getElementById('note-'+id).textContent='';document.getElementById('badge-'+id).classList.remove('passed-id','needsfix-id','failed-id')});updateProgress()}
+(function(){for(var k in state){var btn=document.querySelector('[data-cid="'+k+'"] .btn-rv.'+state[k]);if(btn)rv(k,state[k],btn)}updateProgress()})();
+</script>
+</body>
+</html>
