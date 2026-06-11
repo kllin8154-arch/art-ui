@@ -374,6 +374,21 @@ export { RingProgress } from './components/RingProgress/RingProgress';
 // ─── Badge ───
 export { Badge } from './components/Badge/Badge';
 
+// ─── Group ───
+export { Group } from './components/Group/Group';
+
+// ─── Stack ───
+export { Stack } from './components/Stack/Stack';
+
+// ─── Grid ───
+export { Grid } from './components/Grid/Grid';
+
+// ─── Center ───
+export { Center } from './components/Center/Center';
+
+// ─── Paper ───
+export { Paper } from './components/Paper/Paper';
+
 // ─── Hooks ───
 export { useMediaQuery, useBreakpoint } from './hooks/useMediaQuery';
 export { useScrollPosition, useParallax, useInView } from './hooks/useScrollPosition';
