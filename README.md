@@ -4,6 +4,10 @@
 </p>
 
 <p align="center">
+  <strong>English</strong> | <a href="./README.zh-CN.md">中文</a>
+</p>
+
+<p align="center">
   <a href="https://www.npmjs.com/package/art-ui"><img src="https://img.shields.io/npm/v/art-ui" alt="npm"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/npm/l/art-ui" alt="license"></a>
   <a href="https://www.npmjs.com/package/art-ui"><img src="https://img.shields.io/npm/dm/art-ui" alt="downloads"></a>
