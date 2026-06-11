@@ -4,11 +4,11 @@
   "description": "ArtUI — An art-focused React UI component library for portfolios, photography showcases, galleries, and creative projects. 108 components, zero runtime deps.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_USERNAME/art-ui.git"
+    "url": "git+https://github.com/kllin8154-arch/art-ui.git"
   },
-  "homepage": "https://github.com/YOUR_USERNAME/art-ui#readme",
+  "homepage": "https://github.com/kllin8154-arch/art-ui#readme",
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/art-ui/issues"
+    "url": "https://github.com/kllin8154-arch/art-ui/issues"
   },
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
