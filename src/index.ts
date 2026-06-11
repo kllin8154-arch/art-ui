@@ -350,6 +350,30 @@ export { Anchor } from './components/Anchor/Anchor';
 // ─── Container ───
 export { Container } from './components/Container/Container';
 
+// ─── Kbd ───
+export { Kbd } from './components/Kbd/Kbd';
+
+// ─── VisuallyHidden ───
+export { VisuallyHidden } from './components/VisuallyHidden/VisuallyHidden';
+
+// ─── Combobox ───
+export { Combobox } from './components/Combobox/Combobox';
+
+// ─── MultiSelect ───
+export { MultiSelect } from './components/MultiSelect/MultiSelect';
+
+// ─── ToggleGroup ───
+export { ToggleGroup } from './components/ToggleGroup/ToggleGroup';
+
+// ─── Sheet ───
+export { Sheet } from './components/Sheet/Sheet';
+
+// ─── RingProgress ───
+export { RingProgress } from './components/RingProgress/RingProgress';
+
+// ─── Badge ───
+export { Badge } from './components/Badge/Badge';
+
 // ─── Hooks ───
 export { useMediaQuery, useBreakpoint } from './hooks/useMediaQuery';
 export { useScrollPosition, useParallax, useInView } from './hooks/useScrollPosition';
