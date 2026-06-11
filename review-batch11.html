@@ -23,6 +23,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);background:var(--bg)}
+svg.icon{width:1em;height:1em;flex-shrink:0;vertical-align:-.125em}
 
 /* ═══════════════════════════════════════════ Top Bar ═══════════════════════════════════════════ */
 .topbar{position:sticky;top:0;z-index:2000;background:var(--surface);border-bottom:1px solid var(--border);
@@ -36,7 +37,7 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
 .progress-num{font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
 .topbar-actions{display:flex;gap:8px}
 .btn-sm{padding:7px 16px;border-radius:var(--radiusSm);border:1px solid var(--border);background:var(--surface);
-  cursor:pointer;font-size:.8rem;color:var(--text);font-family:var(--fontB);transition:all .2s}
+  cursor:pointer;font-size:.8rem;color:var(--text);font-family:var(--fontB);transition:all .2s;display:inline-flex;align-items:center;gap:5px}
 .btn-sm:hover{background:var(--bg2);border-color:var(--accent)}
 .btn-sm.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .btn-sm.primary:hover{opacity:.9}
@@ -60,7 +61,7 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
 .panel-id.failed-id{color:var(--red);background:var(--redBg)}
 .panel-id.needsfix-id{color:var(--amber);background:var(--amberBg)}
 .panel-name{font-family:var(--fontD);font-size:1.05rem;font-weight:700;margin-right:auto}
-.panel-badge{font-size:.66rem;padding:3px 8px;border-radius:8px;font-weight:600;flex-shrink:0}
+.panel-badge{font-size:.66rem;padding:3px 8px;border-radius:8px;font-weight:600;flex-shrink:0;letter-spacing:.02em}
 .panel-badge.tsx{background:#e0f2fe;color:#0369a1}
 .panel-badge.css{background:#fce7f3;color:#9d174d}
 [data-art-theme="dark"] .panel-badge.tsx{background:#0c4a6e;color:#7dd3fc}
@@ -74,7 +75,7 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
   border-top:1px solid var(--borderS);gap:10px}
 .review-actions{display:flex;gap:6px}
 .btn-rv{padding:7px 14px;border-radius:var(--radiusSm);border:1px solid var(--border);
-  cursor:pointer;font-size:.78rem;font-weight:500;font-family:var(--fontB);transition:all .2s}
+  cursor:pointer;font-size:.78rem;font-weight:500;font-family:var(--fontB);transition:all .2s;display:inline-flex;align-items:center;gap:4px}
 .btn-rv.pass{color:var(--green);border-color:var(--green)}.btn-rv.pass:hover,.btn-rv.pass.active{background:var(--green);color:#fff}
 .btn-rv.fix{color:var(--amber);border-color:var(--amber)}.btn-rv.fix:hover,.btn-rv.fix.active{background:var(--amber);color:#fff}
 .btn-rv.fail{color:var(--red);border-color:var(--red)}.btn-rv.fail:hover,.btn-rv.fail.active{background:var(--red);color:#fff}
@@ -91,7 +92,8 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
   font-family:var(--fontB);font-size:.88rem;font-weight:500;color:var(--text);text-align:left;transition:background .2s}
 .acc-trigger:hover:not(:disabled){background:var(--bg2)}
 .acc-trigger:disabled{cursor:not-allowed;opacity:.45}
-.acc-title{flex:1}
+.acc-title{flex:1;display:flex;align-items:center;gap:8px}
+.acc-title-icon{width:18px;height:18px;flex-shrink:0;color:var(--accent)}
 .acc-chev{flex-shrink:0;color:var(--textM);transition:transform .25s ease;width:15px;height:15px}
 .acc-chev.open{transform:rotate(180deg)}
 .acc-panel{overflow:hidden;max-height:0;opacity:0;transition:max-height .35s ease,opacity .25s ease .1s}
@@ -113,16 +115,16 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
 
 /* ─── Alert ─── */
 .al{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border-radius:var(--radiusSm);
-  border:1px solid transparent;font-size:.86rem;line-height:1.55;margin-bottom:10px;transition:opacity .2s}
+  border:1px solid transparent;font-size:.86rem;line-height:1.55;margin-bottom:10px;transition:opacity .2s,height .2s,margin .2s,padding .2s}
 .al:last-child{margin-bottom:0}
-.al-icon{width:18px;height:18px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;
-  font-size:.85rem;font-weight:700}
+.al-icon{width:20px;height:20px;flex-shrink:0;margin-top:1px}
 .al-body{flex:1;min-width:0}
 .al-title{font-weight:600;font-size:.88rem;margin-bottom:1px}
 .al-text{color:inherit;opacity:.82}
 .al-close{flex-shrink:0;background:transparent;border:none;cursor:pointer;color:inherit;opacity:.5;
-  padding:2px 4px;font-size:1rem;line-height:1;transition:opacity .15s;border-radius:4px}
+  padding:2px;line-height:1;transition:opacity .15s;border-radius:4px;display:flex;align-items:center;justify-content:center}
 .al-close:hover{opacity:1;background:rgba(0,0,0,.06)}
+.al-close svg{width:16px;height:16px}
 .al-info{background:#eef4ff;border-color:#b3d4ff;color:#1e40af}
 .al-success{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
 .al-warning{background:#fffbeb;border-color:#fde68a;color:#92400e}
@@ -145,7 +147,8 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
   padding:12px 16px;background:transparent;border:none;cursor:pointer;
   font-family:var(--fontB);font-size:.88rem;font-weight:500;color:var(--text);transition:background .2s}
 .col-trigger:hover{background:var(--bg2)}
-.col-title{flex:1;text-align:left}
+.col-title{flex:1;text-align:left;display:flex;align-items:center;gap:7px}
+.col-title-icon{width:16px;height:16px;flex-shrink:0;color:var(--accent)}
 .col-chev{flex-shrink:0;color:var(--textM);transition:transform .25s ease;width:14px;height:14px}
 .col-chev.open{transform:rotate(180deg)}
 .col-panel{overflow:hidden;height:0;transition:height .35s ease}
@@ -153,17 +156,18 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
 .col-content{padding:0 16px 14px;font-size:.84rem;line-height:1.65;color:var(--text2)}
 
 /* ─── HoverCard ─── */
-.hc-trigger{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:var(--surface);
+.hc-trigger{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:var(--surface);
   border:1px solid var(--border);border-radius:var(--radiusSm);cursor:pointer;font-size:.87rem;
   color:var(--text);font-family:var(--fontB);transition:all .2s}
 .hc-trigger:hover{background:var(--bg2);border-color:var(--accent)}
+.hc-trigger-icon{width:17px;height:17px;color:var(--accent);flex-shrink:0}
 .hc-card{position:fixed;z-index:1000;min-width:240px;max-width:320px;padding:18px 20px;
   background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
   box-shadow:0 8px 30px rgba(0,0,0,.15);pointer-events:auto;display:none;animation:hcIn .2s ease}
 @keyframes hcIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .hc-title{font-weight:600;font-size:.92rem;margin-bottom:6px;color:var(--text)}
 .hc-text{font-size:.82rem;color:var(--text2);line-height:1.55}
-.hc-foot{display:flex;gap:10px;margin-top:10px}
+.hc-foot{display:flex;gap:10px;margin-top:10px;align-items:center}
 
 /* ─── Anchor ─── */
 .an-wrap{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
@@ -192,16 +196,26 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
 <!-- ═══════════════════════════════════════════ Top Bar ═══════════════════════════════════════════ -->
 <header class="topbar">
   <div class="topbar-left">
-    <h1>ArtUI · Batch 11 审核</h1>
+    <h1>ArtUI &middot; Batch 11 审核</h1>
     <div class="progress">
       <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
       <span><span class="progress-num" id="passedCount">0</span>/8 通过</span>
     </div>
   </div>
   <div class="topbar-actions">
-    <button class="btn-sm primary" onclick="allPass()">一键通过全部</button>
-    <button class="btn-sm" onclick="resetAll()">重置审核</button>
-    <button class="btn-sm" onclick="toggleTheme()" id="themeBtn">🌙 深色</button>
+    <button class="btn-sm primary" onclick="allPass()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      一键通过全部
+    </button>
+    <button class="btn-sm" onclick="resetAll()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      重置审核
+    </button>
+    <button class="btn-sm" onclick="toggleTheme()" id="themeBtn">
+      <svg id="themeSun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      <svg id="themeMoon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      <span id="themeLabel">深色模式</span>
+    </button>
   </div>
 </header>
 
@@ -214,21 +228,69 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
     <span class="panel-name">Accordion</span>
     <span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span>
   </div>
-  <div class="panel-desc">多面板手风琴折叠 · 单选/多选展开 · 图标旋转动画 · disabled 项</div>
+  <div class="panel-desc">多面板手风琴折叠 &middot; 单选 / 多选展开 &middot; 图标旋转动画 &middot; disabled 项</div>
   <div class="panel-body">
     <div class="acc" id="accRoot">
-      <div class="acc-item"><button class="acc-trigger" data-acc="0"><span class="acc-title">🎨 艺术风格设计系统</span><svg class="acc-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg></button><div class="acc-panel"><div class="acc-content">ArtUI 采用温润的纸张色调与古典画廊质感，每个组件都经过精心调校以营造沉浸式的艺术浏览体验。</div></div></div>
-      <div class="acc-item"><button class="acc-trigger" data-acc="1"><span class="acc-title">⚡ 极致性能</span><svg class="acc-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg></button><div class="acc-panel"><div class="acc-content">零额外依赖（仅 React），CSS Modules 作用域隔离，支持 Tree-shaking，按需导入体积最小化。</div></div></div>
-      <div class="acc-item"><button class="acc-trigger" data-acc="2"><span class="acc-title">♿ WAI-ARIA 无障碍</span><svg class="acc-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg></button><div class="acc-panel"><div class="acc-content">完整键盘导航支持（Tab / Enter / Space），aria-expanded 状态同步，屏幕阅读器友好。</div></div></div>
-      <div class="acc-item"><button class="acc-trigger" data-acc="3" disabled><span class="acc-title">🚫 已禁用项（不可展开）</span><svg class="acc-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg></button><div class="acc-panel"><div class="acc-content">此项不可展开</div></div></div>
+      <div class="acc-item">
+        <button class="acc-trigger" data-acc="0">
+          <span class="acc-title">
+            <svg class="acc-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            设计系统
+          </span>
+          <svg class="acc-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
+        <div class="acc-panel"><div class="acc-content">ArtUI 采用温润的纸张色调与古典画廊质感，每个组件都经过精心调校以营造沉浸式的艺术浏览体验。</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" data-acc="1">
+          <span class="acc-title">
+            <svg class="acc-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            性能优化
+          </span>
+          <svg class="acc-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
+        <div class="acc-panel"><div class="acc-content">零额外依赖（仅 React），CSS Modules 作用域隔离，支持 Tree-shaking，按需导入体积最小化。</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" data-acc="2">
+          <span class="acc-title">
+            <svg class="acc-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg>
+            WAI-ARIA 无障碍
+          </span>
+          <svg class="acc-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
+        <div class="acc-panel"><div class="acc-content">完整键盘导航支持（Tab / Enter / Space），aria-expanded 状态同步，屏幕阅读器友好。</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" data-acc="3" disabled>
+          <span class="acc-title">
+            <svg class="acc-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+            已禁用项（不可展开）
+          </span>
+          <svg class="acc-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
+        <div class="acc-panel"><div class="acc-content">此项已被禁用，不可展开。</div></div>
+      </div>
     </div>
   </div>
   <div class="panel-foot">
     <div class="review-actions" data-cid="109">
-      <button class="btn-rv pass" onclick="review('109','pass',this)">✓ 通过</button>
-      <button class="btn-rv fix" onclick="review('109','needsfix',this)">🔧 需修复</button>
-      <button class="btn-rv fail" onclick="review('109','fail',this)">✕ 驳回</button>
-      <button class="btn-rv skip" onclick="review('109','skip',this)">跳过</button>
+      <button class="btn-rv pass" onclick="review('109','pass',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        通过
+      </button>
+      <button class="btn-rv fix" onclick="review('109','needsfix',this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        需修复
+      </button>
+      <button class="btn-rv fail" onclick="review('109','fail',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        驳回
+      </button>
+      <button class="btn-rv skip" onclick="review('109','skip',this)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        跳过
+      </button>
     </div>
     <span class="review-note" id="note-109"></span>
   </div>
@@ -241,7 +303,7 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
     <span class="panel-name">Slider</span>
     <span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span>
   </div>
-  <div class="panel-desc">可拖拽滑块 · 实时数值显示 · 受控/非受控双模式 · label + min/max/step</div>
+  <div class="panel-desc">可拖拽滑块 &middot; 实时数值显示 &middot; 受控 / 非受控双模式 &middot; label + min/max/step</div>
   <div class="panel-body">
     <div class="sl-wrap" id="slWrap1">
       <span class="sl-label">音量</span>
@@ -261,10 +323,10 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
   </div>
   <div class="panel-foot">
     <div class="review-actions" data-cid="110">
-      <button class="btn-rv pass" onclick="review('110','pass',this)">✓ 通过</button>
-      <button class="btn-rv fix" onclick="review('110','needsfix',this)">🔧 需修复</button>
-      <button class="btn-rv fail" onclick="review('110','fail',this)">✕ 驳回</button>
-      <button class="btn-rv skip" onclick="review('110','skip',this)">跳过</button>
+      <button class="btn-rv pass" onclick="review('110','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 通过</button>
+      <button class="btn-rv fix" onclick="review('110','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> 需修复</button>
+      <button class="btn-rv fail" onclick="review('110','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 驳回</button>
+      <button class="btn-rv skip" onclick="review('110','skip',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> 跳过</button>
     </div>
     <span class="review-note" id="note-110"></span>
   </div>
@@ -277,19 +339,39 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
     <span class="panel-name">Alert</span>
     <span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span>
   </div>
-  <div class="panel-desc">4 种语义变体（info / success / warning / error）· 可关闭（dismissible）· 标题 + 正文</div>
+  <div class="panel-desc">4 种语义变体（info / success / warning / error）&middot; 可关闭（dismissible）&middot; 标题 + 正文结构</div>
   <div class="panel-body" id="alertDemos">
-    <div class="al al-info"><span class="al-icon">ℹ</span><div class="al-body"><div class="al-title">提示信息</div><div class="al-text">这是一条普通信息，用于告知用户一般性内容。</div></div><button class="al-close" onclick="this.parentElement.style.opacity='0';setTimeout(()=>this.parentElement.remove(),200)">×</button></div>
-    <div class="al al-success"><span class="al-icon">✓</span><div class="al-body"><div class="al-title">操作成功</div><div class="al-text">你的更改已成功保存到数据库。</div></div><button class="al-close" onclick="this.parentElement.style.opacity='0';setTimeout(()=>this.parentElement.remove(),200)">×</button></div>
-    <div class="al al-warning"><span class="al-icon">⚠</span><div class="al-body"><div class="al-title">注意</div><div class="al-text">此操作可能带来数据变更风险，请确认后继续。</div></div><button class="al-close" onclick="this.parentElement.style.opacity='0';setTimeout(()=>this.parentElement.remove(),200)">×</button></div>
-    <div class="al al-error"><span class="al-icon">✕</span><div class="al-body"><div class="al-title">提交失败</div><div class="al-text">服务器返回 500 错误，请稍后重试。</div></div><button class="al-close" onclick="this.parentElement.style.opacity='0';setTimeout(()=>this.parentElement.remove(),200)">×</button></div>
+    <!-- info -->
+    <div class="al al-info">
+      <svg class="al-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div class="al-body"><div class="al-title">提示信息</div><div class="al-text">这是一条普通信息，用于告知用户一般性内容。</div></div>
+      <button class="al-close" onclick="dismissAlert(this)" aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+    <!-- success -->
+    <div class="al al-success">
+      <svg class="al-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <div class="al-body"><div class="al-title">操作成功</div><div class="al-text">你的更改已成功保存到数据库。</div></div>
+      <button class="al-close" onclick="dismissAlert(this)" aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+    <!-- warning -->
+    <div class="al al-warning">
+      <svg class="al-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+      <div class="al-body"><div class="al-title">注意</div><div class="al-text">此操作可能带来数据变更风险，请确认后继续。</div></div>
+      <button class="al-close" onclick="dismissAlert(this)" aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+    <!-- error -->
+    <div class="al al-error">
+      <svg class="al-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+      <div class="al-body"><div class="al-title">提交失败</div><div class="al-text">服务器返回 500 错误，请稍后重试。</div></div>
+      <button class="al-close" onclick="dismissAlert(this)" aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
   </div>
   <div class="panel-foot">
     <div class="review-actions" data-cid="111">
-      <button class="btn-rv pass" onclick="review('111','pass',this)">✓ 通过</button>
-      <button class="btn-rv fix" onclick="review('111','needsfix',this)">🔧 需修复</button>
-      <button class="btn-rv fail" onclick="review('111','fail',this)">✕ 驳回</button>
-      <button class="btn-rv skip" onclick="review('111','skip',this)">跳过</button>
+      <button class="btn-rv pass" onclick="review('111','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 通过</button>
+      <button class="btn-rv fix" onclick="review('111','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> 需修复</button>
+      <button class="btn-rv fail" onclick="review('111','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 驳回</button>
+      <button class="btn-rv skip" onclick="review('111','skip',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> 跳过</button>
     </div>
     <span class="review-note" id="note-111"></span>
   </div>
@@ -302,10 +384,10 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
     <span class="panel-name">ScrollArea</span>
     <span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span>
   </div>
-  <div class="panel-desc">自定义滚动条样式 · height/maxHeight 约束 · 原生平滑滚动 · 品牌色 thumb</div>
+  <div class="panel-desc">自定义滚动条样式 &middot; height / maxHeight 约束 &middot; 原生平滑滚动 &middot; 品牌色 accent thumb</div>
   <div class="panel-body">
     <div class="sa">
-      <div class="sa-line">01 — 自定义滚动条 · Firefox scrollbar-width: thin</div>
+      <div class="sa-line">01 — 自定义滚动条 &middot; Firefox scrollbar-width: thin</div>
       <div class="sa-line">02 — Webkit -webkit-scrollbar 样式定制</div>
       <div class="sa-line">03 — 品牌色 accent 作为 hover 态 thumb 颜色</div>
       <div class="sa-line">04 — 适用于侧边栏、下拉菜单等受限空间</div>
@@ -316,15 +398,15 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
       <div class="sa-line">09 — 滚动条在无 hover 时保持低调</div>
       <div class="sa-line">10 — hover 时 thumb 变为 accent 色</div>
       <div class="sa-line">11 — 兼容 Chrome / Firefox / Safari</div>
-      <div class="sa-line">12 — 到达底部 ✓ 滚动区域完整可用</div>
+      <div class="sa-line">12 — 到达底部 &middot; 滚动区域完整可用</div>
     </div>
   </div>
   <div class="panel-foot">
     <div class="review-actions" data-cid="112">
-      <button class="btn-rv pass" onclick="review('112','pass',this)">✓ 通过</button>
-      <button class="btn-rv fix" onclick="review('112','needsfix',this)">🔧 需修复</button>
-      <button class="btn-rv fail" onclick="review('112','fail',this)">✕ 驳回</button>
-      <button class="btn-rv skip" onclick="review('112','skip',this)">跳过</button>
+      <button class="btn-rv pass" onclick="review('112','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 通过</button>
+      <button class="btn-rv fix" onclick="review('112','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> 需修复</button>
+      <button class="btn-rv fail" onclick="review('112','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 驳回</button>
+      <button class="btn-rv skip" onclick="review('112','skip',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> 跳过</button>
     </div>
     <span class="review-note" id="note-112"></span>
   </div>
@@ -337,27 +419,30 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
     <span class="panel-name">Collapse</span>
     <span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span>
   </div>
-  <div class="panel-desc">单面板展开/收起 · 高度动画 · ResizeObserver 自适应 · 受控/非受控</div>
+  <div class="panel-desc">单面板展开 / 收起 &middot; 高度动画过渡 &middot; ResizeObserver 自适应内容 &middot; 受控 / 非受控模式</div>
   <div class="panel-body">
     <div class="col" id="colRoot">
       <button class="col-trigger" onclick="colToggle()">
-        <span class="col-title">📋 点击查看实现细节</span>
-        <svg class="col-chev" id="colChev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+        <span class="col-title">
+          <svg class="col-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+          点击展开查看实现细节
+        </span>
+        <svg class="col-chev" id="colChev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
       </button>
       <div class="col-panel" id="colPanel">
         <div class="col-content">
           <p>Collapse 组件适用于 FAQ 问答、设置面板、详情展开等场景。</p>
-          <p style="margin-top:6px">支持 <strong>受控</strong>（<code>open</code> prop）和 <strong>非受控</strong>（<code>defaultOpen</code>）两种模式。内置 <code>ResizeObserver</code> 自动检测内容高度变化，实现流畅的展开/收起动画。</p>
+          <p style="margin-top:6px">支持 <strong>受控</strong>（<code>open</code> prop）和 <strong>非受控</strong>（<code>defaultOpen</code>）两种模式。内置 <code>ResizeObserver</code> 自动检测内容高度变化，实现流畅的展开 / 收起动画。</p>
         </div>
       </div>
     </div>
   </div>
   <div class="panel-foot">
     <div class="review-actions" data-cid="113">
-      <button class="btn-rv pass" onclick="review('113','pass',this)">✓ 通过</button>
-      <button class="btn-rv fix" onclick="review('113','needsfix',this)">🔧 需修复</button>
-      <button class="btn-rv fail" onclick="review('113','fail',this)">✕ 驳回</button>
-      <button class="btn-rv skip" onclick="review('113','skip',this)">跳过</button>
+      <button class="btn-rv pass" onclick="review('113','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 通过</button>
+      <button class="btn-rv fix" onclick="review('113','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> 需修复</button>
+      <button class="btn-rv fail" onclick="review('113','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 驳回</button>
+      <button class="btn-rv skip" onclick="review('113','skip',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> 跳过</button>
     </div>
     <span class="review-note" id="note-113"></span>
   </div>
@@ -370,29 +455,33 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
     <span class="panel-name">HoverCard</span>
     <span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span>
   </div>
-  <div class="panel-desc">鼠标悬停触发 · 4 方向定位（top/bottom/left/right）· openDelay 延迟 · 淡入动画</div>
+  <div class="panel-desc">鼠标悬停触发 &middot; 4 方向定位 &middot; openDelay 延迟 &middot; 淡入动画 &middot; fixed 定位跟随</div>
   <div class="panel-body">
     <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;min-height:120px">
       <div onmouseenter="hcShow(event,'hc1')" onmouseleave="hcHide('hc1')" style="position:relative">
-        <span class="hc-trigger">🔍 悬停查看</span>
+        <span class="hc-trigger">
+          <svg class="hc-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          悬停查看详情
+        </span>
         <div class="hc-card" id="hc1" style="left:0;top:0;transform:translateX(-50%)">
           <div class="hc-title">ArtUI 组件库</div>
           <div class="hc-text">116 个艺术风格 React 组件，涵盖布局、导航、表单、反馈、数据展示等全类别。</div>
           <div class="hc-foot">
-            <span style="font-size:.74rem;color:var(--accent);font-weight:600">⭐ 116 组件</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--accent)" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span style="font-size:.74rem;color:var(--accent);font-weight:600">116 组件</span>
             <span style="font-size:.74rem;color:var(--textM)">v1.0.0-beta</span>
           </div>
         </div>
       </div>
-      <span style="font-size:.8rem;color:var(--textM)">← 悬停左侧按钮</span>
+      <span style="font-size:.8rem;color:var(--textM)">hover 左侧按钮查看卡片</span>
     </div>
   </div>
   <div class="panel-foot">
     <div class="review-actions" data-cid="114">
-      <button class="btn-rv pass" onclick="review('114','pass',this)">✓ 通过</button>
-      <button class="btn-rv fix" onclick="review('114','needsfix',this)">🔧 需修复</button>
-      <button class="btn-rv fail" onclick="review('114','fail',this)">✕ 驳回</button>
-      <button class="btn-rv skip" onclick="review('114','skip',this)">跳过</button>
+      <button class="btn-rv pass" onclick="review('114','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 通过</button>
+      <button class="btn-rv fix" onclick="review('114','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> 需修复</button>
+      <button class="btn-rv fail" onclick="review('114','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 驳回</button>
+      <button class="btn-rv skip" onclick="review('114','skip',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> 跳过</button>
     </div>
     <span class="review-note" id="note-114"></span>
   </div>
@@ -405,20 +494,26 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
     <span class="panel-name">Anchor</span>
     <span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span>
   </div>
-  <div class="panel-desc">3 种变体（default 下划线动画 / subtle 低调 / button 按钮）· hover 微交互</div>
+  <div class="panel-desc">3 种变体（default / subtle / button）&middot; hover 下划线动画微交互 &middot; 语义化 &lt;a&gt; 标签</div>
   <div class="panel-body">
     <div class="an-wrap">
-      <a class="an" href="#115">default — 鼠标悬停查看优雅的下划线动画 →</a>
-      <a class="an an-subtle" href="#115">subtle — 适合正文内联引用，低调不抢眼 →</a>
-      <a class="an an-btn" href="#115">button — 行动号召链接 ↗</a>
+      <a class="an" href="#115">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.2em;margin-right:4px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        default — 悬停查看下划线动画
+      </a>
+      <a class="an an-subtle" href="#115">subtle — 适合正文内联引用，低调不抢眼</a>
+      <a class="an an-btn" href="#115">
+        行动号召链接
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
     </div>
   </div>
   <div class="panel-foot">
     <div class="review-actions" data-cid="115">
-      <button class="btn-rv pass" onclick="review('115','pass',this)">✓ 通过</button>
-      <button class="btn-rv fix" onclick="review('115','needsfix',this)">🔧 需修复</button>
-      <button class="btn-rv fail" onclick="review('115','fail',this)">✕ 驳回</button>
-      <button class="btn-rv skip" onclick="review('115','skip',this)">跳过</button>
+      <button class="btn-rv pass" onclick="review('115','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 通过</button>
+      <button class="btn-rv fix" onclick="review('115','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> 需修复</button>
+      <button class="btn-rv fail" onclick="review('115','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 驳回</button>
+      <button class="btn-rv skip" onclick="review('115','skip',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> 跳过</button>
     </div>
     <span class="review-note" id="note-115"></span>
   </div>
@@ -431,28 +526,28 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
     <span class="panel-name">Container</span>
     <span class="panel-badge tsx">TSX</span><span class="panel-badge css">CSS</span>
   </div>
-  <div class="panel-desc">6 档尺寸（xs/sm/md/lg/xl/fluid）· 水平居中 · 响应式内边距</div>
+  <div class="panel-desc">6 档尺寸（xs / sm / md / lg / xl / fluid）&middot; 水平居中 &middot; 响应式内边距</div>
   <div class="panel-body">
     <div class="ct-sizes" id="ctSizes">
-      <button class="ct-btn" data-size="xs" onclick="ctSet('xs',this)">xs · 480px</button>
-      <button class="ct-btn" data-size="sm" onclick="ctSet('sm',this)">sm · 640px</button>
-      <button class="ct-btn" data-size="md" onclick="ctSet('md',this)">md · 768px</button>
-      <button class="ct-btn active" data-size="lg" onclick="ctSet('lg',this)">lg · 1024px</button>
-      <button class="ct-btn" data-size="xl" onclick="ctSet('xl',this)">xl · 1280px</button>
+      <button class="ct-btn" data-size="xs" onclick="ctSet('xs',this)">xs &middot; 480px</button>
+      <button class="ct-btn" data-size="sm" onclick="ctSet('sm',this)">sm &middot; 640px</button>
+      <button class="ct-btn" data-size="md" onclick="ctSet('md',this)">md &middot; 768px</button>
+      <button class="ct-btn active" data-size="lg" onclick="ctSet('lg',this)">lg &middot; 1024px</button>
+      <button class="ct-btn" data-size="xl" onclick="ctSet('xl',this)">xl &middot; 1280px</button>
       <button class="ct-btn" data-size="fluid" onclick="ctSet('fluid',this)">fluid</button>
     </div>
     <div class="ct-demo" id="ctDemo" style="max-width:1024px">
       <div class="ct-label">当前尺寸</div>
-      <div class="ct-size" id="ctLabel">lg · 1024px</div>
+      <div class="ct-size" id="ctLabel">lg &middot; 1024px</div>
       <div style="margin-top:8px;font-size:.82rem;color:var(--text2)">容器根据所选尺寸调整最大宽度，始终保持水平居中。响应式内边距在移动端自动收窄。</div>
     </div>
   </div>
   <div class="panel-foot">
     <div class="review-actions" data-cid="116">
-      <button class="btn-rv pass" onclick="review('116','pass',this)">✓ 通过</button>
-      <button class="btn-rv fix" onclick="review('116','needsfix',this)">🔧 需修复</button>
-      <button class="btn-rv fail" onclick="review('116','fail',this)">✕ 驳回</button>
-      <button class="btn-rv skip" onclick="review('116','skip',this)">跳过</button>
+      <button class="btn-rv pass" onclick="review('116','pass',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 通过</button>
+      <button class="btn-rv fix" onclick="review('116','needsfix',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> 需修复</button>
+      <button class="btn-rv fail" onclick="review('116','fail',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 驳回</button>
+      <button class="btn-rv skip" onclick="review('116','skip',this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> 跳过</button>
     </div>
     <span class="review-note" id="note-116"></span>
   </div>
@@ -465,7 +560,9 @@ body{font-family:var(--fontB);font-size:16px;line-height:1.6;color:var(--text);b
 function toggleTheme(){
   var h=document.documentElement,is=h.getAttribute('data-art-theme')==='dark';
   h.setAttribute('data-art-theme',is?'light':'dark');
-  document.getElementById('themeBtn').innerHTML=is?'🌙 深色':'☀️ 浅色';
+  document.getElementById('themeSun').style.display=is?'inline':'none';
+  document.getElementById('themeMoon').style.display=is?'none':'inline';
+  document.getElementById('themeLabel').textContent=is?'深色模式':'浅色模式';
 }
 
 /* ═══════════════════════════════════════════ Accordion ═══════════════════════════════════════════ */
@@ -490,10 +587,10 @@ function toggleTheme(){
   }
   track.addEventListener('pointerdown',function(e){
     e.preventDefault();track.setPointerCapture(e.pointerId);update(e.clientX);
+    function onMove(ev){update(ev.clientX)}
+    function onUp(){track.removeEventListener('pointermove',onMove);track.removeEventListener('pointerup',onUp)}
     track.addEventListener('pointermove',onMove);track.addEventListener('pointerup',onUp);
   });
-  function onMove(e){update(e.clientX)}
-  function onUp(){track.removeEventListener('pointermove',onMove);track.removeEventListener('pointerup',onUp)}
 })();
 
 /* ═══════════════════════════════════════════ Collapse ═══════════════════════════════════════════ */
@@ -501,6 +598,14 @@ function colToggle(){
   var p=document.getElementById('colPanel'),chev=document.getElementById('colChev');
   if(p.classList.contains('open')){p.classList.remove('open');chev.classList.remove('open')}
   else{p.classList.add('open');chev.classList.add('open')}
+}
+
+/* ═══════════════════════════════════════════ Alert dismiss ═══════════════════════════════════════════ */
+function dismissAlert(btn){
+  var al=btn.parentElement;
+  al.style.opacity='0';al.style.maxHeight=al.offsetHeight+'px';
+  requestAnimationFrame(function(){al.style.maxHeight='0';al.style.marginBottom='0';al.style.paddingTop='0';al.style.paddingBottom='0'});
+  setTimeout(function(){al.remove()},250);
 }
 
 /* ═══════════════════════════════════════════ HoverCard ═══════════════════════════════════════════ */
@@ -512,17 +617,14 @@ function hcShow(e,id){
   card.style.left=(r.left+r.width/2)+'px';card.style.top=(r.bottom+8)+'px';
   hcTimers[id]=setTimeout(function(){card.style.display='block'},150);
 }
-function hcHide(id){
-  clearTimeout(hcTimers[id]);
-  document.getElementById(id).style.display='none';
-}
+function hcHide(id){clearTimeout(hcTimers[id]);document.getElementById(id).style.display='none';}
 
 /* ═══════════════════════════════════════════ Container ═══════════════════════════════════════════ */
 var ctSizes={xs:'480px',sm:'640px',md:'768px',lg:'1024px',xl:'1280px',fluid:'none'};
-var ctLabels={xs:'xs · 480px',sm:'sm · 640px',md:'md · 768px',lg:'lg · 1024px',xl:'xl · 1280px',fluid:'fluid · 100%'};
+var ctLabels={xs:'xs &middot; 480px',sm:'sm &middot; 640px',md:'md &middot; 768px',lg:'lg &middot; 1024px',xl:'xl &middot; 1280px',fluid:'fluid &middot; 100%'};
 function ctSet(s,btn){
   document.getElementById('ctDemo').style.maxWidth=ctSizes[s];
-  document.getElementById('ctLabel').textContent=ctLabels[s];
+  document.getElementById('ctLabel').innerHTML=ctLabels[s];
   document.querySelectorAll('#ctSizes .ct-btn').forEach(function(b){b.classList.remove('active')});
   btn.classList.add('active');
 }
@@ -539,28 +641,21 @@ function review(cid,status,btn){
 
 function applyReview(cid,status,btn){
   var panel=document.getElementById('p-'+cid);
-  // Remove all status classes
   panel.classList.remove('passed','failed','needsfix');
-  // Clear active buttons
-  var acts=panel.querySelectorAll('.btn-rv');
-  acts.forEach(function(b){b.classList.remove('active')});
+  panel.querySelectorAll('.btn-rv').forEach(function(b){b.classList.remove('active')});
 
   if(status==='pass'){
-    panel.classList.add('passed');
-    btn.classList.add('active');
-    document.getElementById('note-'+cid).textContent='✓ 已通过';
+    panel.classList.add('passed');btn.classList.add('active');
+    document.getElementById('note-'+cid).textContent='已通过';
   }else if(status==='needsfix'){
-    panel.classList.add('needsfix');
-    btn.classList.add('active');
-    document.getElementById('note-'+cid).textContent='🔧 需修复';
+    panel.classList.add('needsfix');btn.classList.add('active');
+    document.getElementById('note-'+cid).textContent='需修复';
   }else if(status==='fail'){
-    panel.classList.add('failed');
-    btn.classList.add('active');
-    document.getElementById('note-'+cid).textContent='✕ 已驳回';
+    panel.classList.add('failed');btn.classList.add('active');
+    document.getElementById('note-'+cid).textContent='已驳回';
   }else{
     document.getElementById('note-'+cid).textContent='';
   }
-  // Update badge
   var badge=document.getElementById('badge-'+cid);
   badge.classList.remove('passed-id','failed-id','needsfix-id');
   if(status==='pass')badge.classList.add('passed-id');
@@ -569,30 +664,26 @@ function applyReview(cid,status,btn){
 }
 
 function updateProgress(){
-  var passed=0,total=8;
+  var passed=0;
   for(var k in state){if(state[k]==='pass')passed++}
   document.getElementById('passedCount').textContent=passed;
-  document.getElementById('progressFill').style.width=(passed/total*100)+'%';
+  document.getElementById('progressFill').style.width=(passed/8*100)+'%';
 }
 
 function allPass(){
-  var ids=['109','110','111','112','113','114','115','116'];
-  ids.forEach(function(id){
-    var btn=document.querySelector('[data-cid="'+id+'"] .btn-rv.pass');
-    review(id,'pass',btn);
+  ['109','110','111','112','113','114','115','116'].forEach(function(id){
+    review(id,'pass',document.querySelector('[data-cid="'+id+'"] .btn-rv.pass'));
   });
 }
 
 function resetAll(){
   localStorage.removeItem('artui-batch11-review');state={};
-  var ids=['109','110','111','112','113','114','115','116'];
-  ids.forEach(function(id){
+  ['109','110','111','112','113','114','115','116'].forEach(function(id){
     var panel=document.getElementById('p-'+id);
     panel.classList.remove('passed','failed','needsfix');
     panel.querySelectorAll('.btn-rv').forEach(function(b){b.classList.remove('active')});
     document.getElementById('note-'+id).textContent='';
-    var badge=document.getElementById('badge-'+id);
-    badge.classList.remove('passed-id','failed-id','needsfix-id');
+    document.getElementById('badge-'+id).classList.remove('passed-id','failed-id','needsfix-id');
   });
   updateProgress();
 }
@@ -600,8 +691,7 @@ function resetAll(){
 // Init
 (function(){
   for(var k in state){
-    var btn=document.querySelector('[data-cid="'+k+'"] .btn-rv.'+state[k]);
-    applyReview(k,state[k],btn||document.querySelector('[data-cid="'+k+'"] .btn-rv'));
+    applyReview(k,state[k],document.querySelector('[data-cid="'+k+'"] .btn-rv.'+state[k]));
   }
   updateProgress();
 })();
